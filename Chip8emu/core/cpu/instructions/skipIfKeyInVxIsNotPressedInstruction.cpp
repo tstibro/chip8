@@ -1,0 +1,36 @@
+/*
+ * skipIfKeyInVxIsNotPressedInstruction.cpp
+ *
+ *  Created on: Jul 31, 2016
+ *      Author: Tomas Stibrany
+ */
+#include "skipIfKeyInVxIsNotPressedInstruction.hpp"
+#include "../cpu.hpp"
+
+using namespace chip8::core::cpu::instructions;
+using namespace chip8::core::cpu;
+
+SkipIfKeyInVxIsNotPressedInstruction::SkipIfKeyInVxIsNotPressedInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
+{
+	this->registerXindex = registerXindex;
+	this->cpu = cpu;
+}
+
+SkipIfKeyInVxIsNotPressedInstruction::~SkipIfKeyInVxIsNotPressedInstruction()
+{
+}
+
+void SkipIfKeyInVxIsNotPressedInstruction::Execute()
+{
+	u8 targetKeyCode = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
+	u8 pressedKeyCode = this->cpu->GetPressedKey();
+
+	if (targetKeyCode != pressedKeyCode)
+	{
+		this->cpu->SkipNextInstruction();
+	}
+}
+
+
+
+

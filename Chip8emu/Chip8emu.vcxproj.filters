@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="chip8Types.hpp" />
+    <ClInclude Include="chip8emulator.hpp" />
+    <ClInclude Include="core\memory\programLoader.hpp">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="core\memory\ram.hpp">
+      <Filter>core\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="display\display.hpp">
+      <Filter>display</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard\keyboard.hpp">
+      <Filter>keyboard</Filter>
+    </ClInclude>
+    <ClInclude Include="font\font.hpp">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="font\fontChar.hpp">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="font\fontLoader.hpp">
+      <Filter>font</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\registers\gpr.hpp">
+      <Filter>core\cpu\registers</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\registers\ri.hpp">
+      <Filter>core\cpu\registers</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\timers\timer.hpp">
+      <Filter>core\cpu\timers</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\addValueToVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\addVxToIndexRegisterInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\addVyToVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\callInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\clearScreenInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\drawSpriteInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\fillV0toVxWithValueFromMemoryInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\iinstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\jumpInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\jumpToGivenAddressWithOffset.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setDelayTimerToVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setIndexRegisterToFontCharacterInVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setIndexRegisterValueInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setSoundTimerToVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToRandomValueBitwiseAndValueInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToValueInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToValueOfDelayTimerInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToVxAndVyInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToVxOrVyInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToVxXorVyInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToVyInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\setVxToVyMinusVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\shiftVxLeftByOneInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\shiftVxRightByOneInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\skipIfKeyInVxIsNotPressedInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\skipIfKeyInVxIsPressedInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxEqualsValueInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxEqualsVyInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxNotEqualsValueInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxNotEqualsVyInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\storeBCDvalueOfVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\storeV0toVxInMemoryInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\subrutineReturnInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\subtractVyFromVxInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\unknownInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\instructions\waitForKeyPressInstruction.hpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\cpu.hpp">
+      <Filter>core\cpu</Filter>
+    </ClInclude>
+    <ClInclude Include="core\cpu\registers\pcreg.hpp">
+      <Filter>core\cpu\registers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="chip8emulator.cpp" />
+    <ClCompile Include="core\memory\programLoader.cpp">
+      <Filter>core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="core\memory\ram.cpp">
+      <Filter>core\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="display\display.cpp">
+      <Filter>display</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard\keyboard.cpp">
+      <Filter>keyboard</Filter>
+    </ClCompile>
+    <ClCompile Include="font\font.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="font\fontChar.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="font\fontLoader.cpp">
+      <Filter>font</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\registers\gpr.cpp">
+      <Filter>core\cpu\registers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\registers\ri.cpp">
+      <Filter>core\cpu\registers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\timers\timer.cpp">
+      <Filter>core\cpu\timers</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\addValueToVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\addVxToIndexRegisterInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\addVyToVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\callInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\clearScreenInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\drawSpriteInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\fillV0toVxWithValueFromMemoryInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\iinstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\jumpInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\jumpToGivenAddressWithOffset.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setDelayTimerToVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setIndexRegisterToFontCharacterInVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setIndexRegisterValueInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setSoundTimerToVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToRandomValueBitwiseAndValueInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToValueInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToValueOfDelayTimerInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToVxAndVyInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToVxOrVyInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToVxXorVyInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToVyInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\setVxToVyMinusVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\shiftVxLeftByOneInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\shiftVxRightByOneInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\skipIfKeyInVxIsNotPressedInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\skipIfKeyInVxIsPressedInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxEqualsValueInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxEqualsVyInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxNotEqualsValueInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxNotEqualsVyInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\storeBCDvalueOfVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\storeV0toVxInMemoryInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\subrutineReturnInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\subtractVyFromVxInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\unknownInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\instructions\waitForKeyPressInstruction.cpp">
+      <Filter>core\cpu\instructions</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\cpu.cpp">
+      <Filter>core\cpu</Filter>
+    </ClCompile>
+    <ClCompile Include="core\cpu\registers\pcreg.cpp">
+      <Filter>core\cpu\registers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="font">
+      <UniqueIdentifier>{f0a440af-e3f2-4bcd-a64f-96a1aa003696}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="keyboard">
+      <UniqueIdentifier>{0e7da1d9-836a-4583-8116-3a527aaf2cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="display">
+      <UniqueIdentifier>{b9439c77-7be4-469e-8c2f-59dea3054590}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core">
+      <UniqueIdentifier>{cca33ed1-6c6b-4a99-bf4c-151b86117e49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\cpu">
+      <UniqueIdentifier>{ae5002df-5171-409c-9fa9-470814bc3dc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\memory">
+      <UniqueIdentifier>{0815a120-bd88-4e76-8fe7-cd80d55cfb39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\cpu\instructions">
+      <UniqueIdentifier>{9a0f83c0-26e9-4b1a-b170-bf27f1221f28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\cpu\registers">
+      <UniqueIdentifier>{d191e6fa-b73f-475c-bc6d-bf2ee2073e42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\cpu\timers">
+      <UniqueIdentifier>{aeef85fb-4aca-49cb-a09e-2ea70cfade71}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
