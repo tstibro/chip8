@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 FillV0toVxWithValueFromMemoryInstruction::FillV0toVxWithValueFromMemoryInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -29,6 +29,11 @@ void FillV0toVxWithValueFromMemoryInstruction::Execute()
 		u8 newRegisterValue = this->cpu->ReadFromMemory();
 		this->cpu->WriteToGeneralPurposeRegister(currentRegisterIndex, newRegisterValue);
 	}
+}
+
+void FillV0toVxWithValueFromMemoryInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

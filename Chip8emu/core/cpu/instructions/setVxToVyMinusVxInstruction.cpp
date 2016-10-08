@@ -12,8 +12,8 @@ using namespace chip8::core::cpu;
 
 SetVxToVyMinusVxInstruction::SetVxToVyMinusVxInstruction(u8 registerXindex, u8 registerYindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
-	this->registerYindex = registerYindex;
+	SetRegisterXindex(registerXindex);
+	SetRegisterYindex(registerYindex);
 	this->cpu = cpu;
 }
 
@@ -30,6 +30,16 @@ void SetVxToVyMinusVxInstruction::Execute()
 	//VF is set to 0 when there's a borrow, and 1 when there isn't.
 	u8 borrow = (registerYvalue > registerXvalue);
 	this->cpu->WriteToFlagRegister(borrow);
+}
+
+void SetVxToVyMinusVxInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
+}
+
+void SetVxToVyMinusVxInstruction::SetRegisterYindex(u8 registerIndex)
+{
+	this->registerYindex = registerIndex;
 }
 
 

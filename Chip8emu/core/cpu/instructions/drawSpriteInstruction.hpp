@@ -29,6 +29,10 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		DrawSpriteInstruction(u8 xCoordinateRegister, u8 yCoordinateRegister, u8 spriteHeight, CPU *cpu);
 		virtual ~DrawSpriteInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
+		void SetRegisterYindex(u8 registerIndex);
+		void SetSpriteHeight(u8 spriteHeight);
 	};
 
 }}}}

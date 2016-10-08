@@ -28,6 +28,9 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		SetVxToValueInstruction(u8 gprIndex,u8 value,CPU *cpu);
 		virtual ~SetVxToValueInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
+		void SetValue(u8 value);
 	};
 
 }}}}

@@ -155,6 +155,7 @@
     <ClInclude Include="core\cpu\instructions\callInstruction.hpp" />
     <ClInclude Include="core\cpu\instructions\clearScreenInstruction.hpp" />
     <ClInclude Include="core\cpu\instructions\drawSpriteInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\factory\instructionFactory.hpp" />
     <ClInclude Include="core\cpu\instructions\fillV0toVxWithValueFromMemoryInstruction.hpp" />
     <ClInclude Include="core\cpu\instructions\iinstruction.hpp" />
     <ClInclude Include="core\cpu\instructions\jumpInstruction.hpp" />
@@ -206,6 +207,7 @@
     <ClCompile Include="core\cpu\instructions\callInstruction.cpp" />
     <ClCompile Include="core\cpu\instructions\clearScreenInstruction.cpp" />
     <ClCompile Include="core\cpu\instructions\drawSpriteInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\factory\instructionFactory.cpp" />
     <ClCompile Include="core\cpu\instructions\fillV0toVxWithValueFromMemoryInstruction.cpp" />
     <ClCompile Include="core\cpu\instructions\iinstruction.cpp" />
     <ClCompile Include="core\cpu\instructions\jumpInstruction.cpp" />

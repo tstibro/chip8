@@ -28,6 +28,9 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		SetVxToVxXorVyInstruction(u8 registerXindex, u8 registerYindex, CPU *cpu);
 		virtual ~SetVxToVxXorVyInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
+		void SetRegisterYindex(u8 registerIndex);
 	};
 
 }}}}

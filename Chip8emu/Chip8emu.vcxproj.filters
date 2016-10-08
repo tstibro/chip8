@@ -147,6 +147,9 @@
     <ClInclude Include="core\cpu\registers\pcreg.hpp">
       <Filter>core\cpu\registers</Filter>
     </ClInclude>
+    <ClInclude Include="core\cpu\instructions\factory\instructionFactory.hpp">
+      <Filter>core\cpu\instructions\factory</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -295,6 +298,9 @@
     <ClCompile Include="core\cpu\registers\pcreg.cpp">
       <Filter>core\cpu\registers</Filter>
     </ClCompile>
+    <ClCompile Include="core\cpu\instructions\factory\instructionFactory.cpp">
+      <Filter>core\cpu\instructions\factory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="font">
@@ -323,6 +329,9 @@
     </Filter>
     <Filter Include="core\cpu\timers">
       <UniqueIdentifier>{aeef85fb-4aca-49cb-a09e-2ea70cfade71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\cpu\instructions\factory">
+      <UniqueIdentifier>{0ef2f179-9cb5-46d4-b1c7-9dbd9f0896bc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

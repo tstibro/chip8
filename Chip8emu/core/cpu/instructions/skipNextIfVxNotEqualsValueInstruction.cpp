@@ -12,8 +12,8 @@ using namespace chip8::core::cpu;
 
 SkipNextIfVxNotEqualsValueInstruction::SkipNextIfVxNotEqualsValueInstruction(u8 registerXindex, u8 value, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
-	this->value = value;
+	SetRegisterXindex(registerXindex);
+	SetValue(value);
 	this->cpu = cpu;
 }
 
@@ -26,6 +26,16 @@ void SkipNextIfVxNotEqualsValueInstruction::Execute()
 	u8 registerXvalue = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
 	if (registerXvalue != this->value)
 		this->cpu->SkipNextInstruction();
+}
+
+void SkipNextIfVxNotEqualsValueInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
+}
+
+void SkipNextIfVxNotEqualsValueInstruction::SetValue(u8 value)
+{
+	this->value = value;
 }
 
 

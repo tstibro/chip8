@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 SetVxToValueOfDelayTimerInstruction::SetVxToValueOfDelayTimerInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -24,6 +24,11 @@ void SetVxToValueOfDelayTimerInstruction::Execute()
 {
 	u8 delayTimerValue = this->cpu->GetDelayTimerValue();
 	this->cpu->WriteToGeneralPurposeRegister(this->registerXindex, delayTimerValue);
+}
+
+void SetVxToValueOfDelayTimerInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

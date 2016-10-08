@@ -12,9 +12,9 @@ using namespace chip8::core::cpu;
 
 DrawSpriteInstruction::DrawSpriteInstruction(u8 xCoordinateRegister, u8 yCoordinateRegister, u8 spriteHeight, CPU *cpu) : IInstruction()
 {
-	this->xCoordinateRegister = xCoordinateRegister;
-	this->yCoordinateRegister = yCoordinateRegister;
-	this->spriteHeight = spriteHeight;
+	SetRegisterXindex(xCoordinateRegister);
+	SetRegisterYindex(yCoordinateRegister);
+	SetSpriteHeight(spriteHeight);
 	this->cpu = cpu;
 }
 
@@ -42,6 +42,21 @@ void DrawSpriteInstruction::Execute()
 	this->cpu->WriteToFlagRegister(screenPixelFlipped);
 
 	delete spriteData;
+}
+
+void DrawSpriteInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->xCoordinateRegister = registerIndex;
+}
+
+void DrawSpriteInstruction::SetRegisterYindex(u8 registerIndex)
+{
+	this->yCoordinateRegister = registerIndex;
+}
+
+void DrawSpriteInstruction::SetSpriteHeight(u8 spriteHeight)
+{
+	this->spriteHeight = spriteHeight;
 }
 
 

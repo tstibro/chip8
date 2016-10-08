@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 WaitForKeyPressInstruction::WaitForKeyPressInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -27,6 +27,11 @@ void WaitForKeyPressInstruction::Execute()
 	{
 	}
 	this->cpu->WriteToGeneralPurposeRegister(this->registerXindex, pressedKey);
+}
+
+void WaitForKeyPressInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

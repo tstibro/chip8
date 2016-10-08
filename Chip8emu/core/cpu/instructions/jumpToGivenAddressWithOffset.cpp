@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 JumpToGivenAddressWithOffset::JumpToGivenAddressWithOffset(u16 address, CPU *cpu) : IInstruction()
 {
-	this->address = address;
+	SetAddress(address);
 	this->cpu = cpu;
 }
 
@@ -26,6 +26,11 @@ void JumpToGivenAddressWithOffset::Execute()
 	u8 offset = this->cpu->ReadFromGeneralPurposeRegister(registerV0index);
 	u16 finalAddress = this->address + offset;
 	this->cpu->JumpToAddress(finalAddress);
+}
+
+void JumpToGivenAddressWithOffset::SetAddress(u16 address)
+{
+	this->address = address;
 }
 
 

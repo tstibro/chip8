@@ -12,8 +12,8 @@ using namespace chip8::core::cpu;
 
 AddVyToVxInstruction::AddVyToVxInstruction(u8 registerYindex, u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
-	this->registerYindex = registerYindex;
+	SetRegisterXindex(registerXindex);
+	SetRegisterYindex(registerYindex);
 	this->cpu = cpu;
 }
 
@@ -29,6 +29,16 @@ void AddVyToVxInstruction::Execute()
 	//VF is set to 1 when there's a carry, and to 0 when there isn't.
 	u8 carry = (registerXvalue + registerYvalue > 255);
 	this->cpu->WriteToFlagRegister(carry);
+}
+
+void AddVyToVxInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
+}
+
+void AddVyToVxInstruction::SetRegisterYindex(u8 registerIndex)
+{
+	this->registerYindex = registerIndex;
 }
 
 

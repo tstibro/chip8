@@ -12,8 +12,8 @@ using namespace chip8::core::cpu;
 
 AddValueToVxInstruction::AddValueToVxInstruction(u8 registerIndex, u8 value, CPU *cpu) : IInstruction()
 {
-	this->registerIndex = registerIndex;
-	this->value = value;
+	SetRegisterXindex(registerIndex);
+	SetValue(value);
 	this->cpu = cpu;
 }
 
@@ -26,6 +26,16 @@ void AddValueToVxInstruction::Execute()
 	u8 currentValue = cpu->ReadFromGeneralPurposeRegister(registerIndex);
 	u8 newValue = currentValue + value;
 	cpu->WriteToGeneralPurposeRegister(registerIndex, newValue);
+}
+
+void AddValueToVxInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerIndex = registerIndex;
+}
+
+void AddValueToVxInstruction::SetValue(u8 value)
+{
+	this->value = value;
 }
 
 

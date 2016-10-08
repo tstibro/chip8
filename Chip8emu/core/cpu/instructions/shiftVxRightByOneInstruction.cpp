@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 ShiftVxRightByOneInstruction::ShiftVxRightByOneInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -27,6 +27,11 @@ void ShiftVxRightByOneInstruction::Execute()
 	this->cpu->WriteToGeneralPurposeRegister(registerXindex, newValue);
 	//VF is set to the value of the least significant bit of VX before the shift.
 	this->cpu->WriteToFlagRegister((currentValue >> 7) & 0x1);
+}
+
+void ShiftVxRightByOneInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

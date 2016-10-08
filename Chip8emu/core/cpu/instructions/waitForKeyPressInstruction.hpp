@@ -27,6 +27,8 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		WaitForKeyPressInstruction(u8 registerXindex, CPU *cpu);
 		virtual ~WaitForKeyPressInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
 	};
 
 }}}}

@@ -28,6 +28,9 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		SetVxToRandomValueBitwiseAndValueInstruction(u8 registerXindex, u8 value, CPU *cpu);
 		virtual ~SetVxToRandomValueBitwiseAndValueInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
+		void SetValue(u8 value);
 	};
 
 }}}}

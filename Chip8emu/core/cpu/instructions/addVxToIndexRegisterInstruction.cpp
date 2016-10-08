@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 AddVxToIndexRegisterInstruction::AddVxToIndexRegisterInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -28,6 +28,11 @@ void AddVxToIndexRegisterInstruction::Execute()
 	this->cpu->WriteToIndexRegister(newValue);
 	// VF is set to 1 when range overflow (I+VX>0xFFF), and 0 when there isn't.
 	this->cpu->WriteToFlagRegister(newValue > 0xFFF ? 1 : 0);
+}
+
+void AddVxToIndexRegisterInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

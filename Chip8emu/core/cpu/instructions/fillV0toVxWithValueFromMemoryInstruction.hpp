@@ -28,6 +28,8 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		FillV0toVxWithValueFromMemoryInstruction(u8 registerXindex, CPU *cpu);
 		virtual ~FillV0toVxWithValueFromMemoryInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
 	};
 
 }}}}

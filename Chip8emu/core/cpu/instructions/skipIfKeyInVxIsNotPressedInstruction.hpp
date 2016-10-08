@@ -27,6 +27,8 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		SkipIfKeyInVxIsNotPressedInstruction(u8 registerXindex, CPU *cpu);
 		virtual ~SkipIfKeyInVxIsNotPressedInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
 	};
 
 }}}}

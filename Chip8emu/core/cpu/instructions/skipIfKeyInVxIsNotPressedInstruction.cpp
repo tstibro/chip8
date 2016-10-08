@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 SkipIfKeyInVxIsNotPressedInstruction::SkipIfKeyInVxIsNotPressedInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -29,6 +29,11 @@ void SkipIfKeyInVxIsNotPressedInstruction::Execute()
 	{
 		this->cpu->SkipNextInstruction();
 	}
+}
+
+void SkipIfKeyInVxIsNotPressedInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

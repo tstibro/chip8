@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 JumpInstruction::JumpInstruction(u16 address, CPU *cpu) : IInstruction()
 {
-	this->address = address;
+	SetAddress(address);
 	this->cpu = cpu;
 }
 
@@ -23,6 +23,11 @@ JumpInstruction::~JumpInstruction()
 void JumpInstruction::Execute()
 {
 	this->cpu->JumpToAddress(this->address);
+}
+
+void JumpInstruction::SetAddress(u16 address)
+{
+	this->address = address;
 }
 
 

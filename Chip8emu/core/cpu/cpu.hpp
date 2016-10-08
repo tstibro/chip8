@@ -34,6 +34,7 @@ namespace chip8 { namespace io { namespace input
 namespace chip8 { namespace core { namespace cpu { namespace instructions
 {
 	class IInstruction;
+	class InstructionFactory;
 }}}}
 
 using namespace chip8::core::cpu::instructions;
@@ -56,12 +57,12 @@ namespace chip8 { namespace core { namespace cpu
 		GeneralPurposeRegister generalPurposeRegister[GPR_COUNT];
 		IndexRegister indexRegister;
 		ProgramCounterRegister *programCounter;
+		InstructionFactory *instructionFactory;
 
 		Keyboard *keyboard;
 		Display *display;
 
 		u16 loadInstruction();
-		IInstruction *decodeInstruction(u16 rawInstruction);
 		void setNextInstruction();
 	public:
 		// Default constructor

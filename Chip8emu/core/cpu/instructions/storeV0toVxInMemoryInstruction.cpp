@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 StoreV0toVxInMemoryInstruction::StoreV0toVxInMemoryInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -29,5 +29,10 @@ void StoreV0toVxInMemoryInstruction::Execute()
 		this->cpu->WriteToIndexRegister(ramAddress + currentRegisterIndex);
 		this->cpu->WriteToMemory(registerValue);
 	}
+}
+
+void StoreV0toVxInMemoryInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 

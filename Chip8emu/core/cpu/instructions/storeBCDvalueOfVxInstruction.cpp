@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 StoreBCDvalueOfVxInstruction::StoreBCDvalueOfVxInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -36,6 +36,11 @@ void StoreBCDvalueOfVxInstruction::Execute()
 
 	this->cpu->WriteToIndexRegister(address + 2);
 	this->cpu->WriteToMemory(bcdOnes);
+}
+
+void StoreBCDvalueOfVxInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

@@ -27,6 +27,8 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		SetSoundTimerToVxInstruction(u8 registerXindex, CPU *cpu);
 		virtual ~SetSoundTimerToVxInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
 	};
 
 }}}}

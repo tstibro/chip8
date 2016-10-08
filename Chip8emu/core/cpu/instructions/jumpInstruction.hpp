@@ -27,6 +27,8 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		JumpInstruction(u16 address, CPU *cpu);
 		virtual ~JumpInstruction();
 		virtual void Execute();
+
+		void SetAddress(u16 address);
 	};
 
 }}}}

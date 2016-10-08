@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 CallInstruction::CallInstruction(u16 address, CPU *cpu) : IInstruction()
 {
-	this->address = address;
+	SetAddress(address);
 	this->cpu = cpu;
 }
 
@@ -24,6 +24,11 @@ void CallInstruction::Execute()
 {
 	this->cpu->SaveReturnAddress();
 	this->cpu->JumpToAddress(this->address);
+}
+
+void CallInstruction::SetAddress(u16 address)
+{
+	this->address = address;
 }
 
 

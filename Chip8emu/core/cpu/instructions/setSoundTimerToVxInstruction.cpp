@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 SetSoundTimerToVxInstruction::SetSoundTimerToVxInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -24,6 +24,11 @@ void SetSoundTimerToVxInstruction::Execute()
 {
 	u8 registerXvalue = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
 	this->cpu->SetSoundTimerValue(registerXvalue);
+}
+
+void SetSoundTimerToVxInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

@@ -27,6 +27,8 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		JumpToGivenAddressWithOffset(u16 address, CPU *cpu);
 		virtual ~JumpToGivenAddressWithOffset();
 		virtual void Execute();
+
+		void SetAddress(u16 address);
 	};
 
 }}}}

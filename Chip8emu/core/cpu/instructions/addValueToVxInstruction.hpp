@@ -29,6 +29,9 @@ namespace chip8 { namespace core { namespace cpu { namespace instructions
 		AddValueToVxInstruction(u8 registerIndex, u8 value, CPU *cpu);
 		virtual ~AddValueToVxInstruction();
 		virtual void Execute();
+
+		void SetRegisterXindex(u8 registerIndex);
+		void SetValue(u8 value);
 	};
 
 }}}}

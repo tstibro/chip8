@@ -12,8 +12,8 @@ using namespace chip8::core::cpu;
 
 SkipNextIfVxEqualsVyInstruction::SkipNextIfVxEqualsVyInstruction(u8 registerXindex, u8 registerYindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
-	this->registerYindex = registerYindex;
+	SetRegisterXindex(registerXindex);
+	SetRegisterYindex(registerYindex);
 	this->cpu = cpu;
 }
 
@@ -27,6 +27,16 @@ void SkipNextIfVxEqualsVyInstruction::Execute()
 	u8 registerYvalue = this->cpu->ReadFromGeneralPurposeRegister(this->registerYindex);
 	if (registerXvalue == registerYvalue)
 		this->cpu->SkipNextInstruction();
+}
+
+void SkipNextIfVxEqualsVyInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
+}
+
+void SkipNextIfVxEqualsVyInstruction::SetRegisterYindex(u8 registerIndex)
+{
+	this->registerYindex = registerIndex;
 }
 
 

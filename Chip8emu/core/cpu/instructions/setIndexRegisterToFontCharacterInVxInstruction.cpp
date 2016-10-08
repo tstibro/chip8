@@ -12,7 +12,7 @@ using namespace chip8::core::cpu;
 
 SetIndexRegisterToFontCharacterInVxInstruction::SetIndexRegisterToFontCharacterInVxInstruction(u8 registerXindex, CPU *cpu) : IInstruction()
 {
-	this->registerXindex = registerXindex;
+	SetRegisterXindex(registerXindex);
 	this->cpu = cpu;
 }
 
@@ -25,6 +25,11 @@ void SetIndexRegisterToFontCharacterInVxInstruction::Execute()
 	u8 fontCharacterIndex = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
 	u16 fontCharacterAddress = this->cpu->GetFontDataStartAddress() + (fontCharacterIndex * 5); // 5 bytes per character. Note: refactor this constant.
 	this->cpu->WriteToIndexRegister(fontCharacterAddress);
+}
+
+void SetIndexRegisterToFontCharacterInVxInstruction::SetRegisterXindex(u8 registerIndex)
+{
+	this->registerXindex = registerIndex;
 }
 
 

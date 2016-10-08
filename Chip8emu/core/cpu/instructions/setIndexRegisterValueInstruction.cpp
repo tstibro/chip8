@@ -13,7 +13,7 @@ using namespace chip8::core::cpu;
 SetIndexRegisterValueInstruction::SetIndexRegisterValueInstruction(u16 value, CPU *cpu)  :IInstruction()
 {
 	this->cpu = cpu;
-	this->value = value;
+	SetAddress(value);
 }
 
 SetIndexRegisterValueInstruction::~SetIndexRegisterValueInstruction()
@@ -23,6 +23,11 @@ SetIndexRegisterValueInstruction::~SetIndexRegisterValueInstruction()
 void SetIndexRegisterValueInstruction::Execute()
 {
 	this->cpu->WriteToIndexRegister(value);
+}
+
+void SetIndexRegisterValueInstruction::SetAddress(u16 value)
+{
+	this->value = value;
 }
 
 
