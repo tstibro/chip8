@@ -14,8 +14,14 @@ int main(int argc, char **argv)
 
  	if(argc > 1)
 	{
+		emulator->CreateWindow("Chip8 Emulator");
  		emulator->LoadROM(argv[1]);
- 		emulator->Run();
+
+		bool isRunning = true;
+		while (isRunning)
+		{
+ 			emulator->EmulateCycle();
+		}
 	}
 	else
 	{

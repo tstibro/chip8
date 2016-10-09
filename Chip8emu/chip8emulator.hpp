@@ -57,8 +57,9 @@ namespace chip8
 		Chip8();
 		~Chip8();
 
+		void CreateWindow(char *windowTitle);
 		void LoadROM(char *filePath);
-		void Run();
+		void EmulateCycle();
 	};
 }
 

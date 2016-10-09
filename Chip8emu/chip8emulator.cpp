@@ -51,6 +51,12 @@ Chip8::~Chip8()
 	delete cpu;
 }
 
+void Chip8::CreateWindow(char *windowTitle)
+{
+	display->CreateWindow(windowTitle);
+	display->ClearScreen();
+}
+
 void Chip8::LoadROM(char *filePath)
 {
 	ProgramLoader programLoader;
@@ -58,17 +64,11 @@ void Chip8::LoadROM(char *filePath)
 	romLoaded = true;
 }
 
-void Chip8::Run()
+void Chip8::EmulateCycle()
 {
 	if (romLoaded)
 	{
-		display->CreateWindow("Chip8 Emulator");
-		display->ClearScreen();
-
 		SDL_Event event;
-		/*u8 spriteData[5] = {0xf0,0x10,0xf0,0x10,0xf0};
-		int x = 0;
-		int y = 0;*/
 		while (1)
 		{
 			SDL_WaitEvent(&event);
@@ -76,9 +76,7 @@ void Chip8::Run()
 			{
 				break;
 			}
-
 			cpu->ExecuteInstruction();
-			//display->Draw(spriteData, 1, 5, x++ % 64, y++ % 32);
 			display->Refresh();
 		}
 	}
