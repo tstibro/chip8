@@ -149,6 +149,16 @@ void CPU::SetSoundTimerValue(u8 value)
 	this->soundTimer.SetValue(value);
 }
 
+void CPU::TimerTick()
+{
+	if (timerTicks++ > 16)
+	{
+		this->delayTimer.Tick();
+		this->soundTimer.Tick();
+		timerTicks = 0;
+	}
+}
+
 u8 CPU::GetPressedKey()
 {
 	return this->keyboard->GetPressedKey();

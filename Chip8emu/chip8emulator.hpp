@@ -7,6 +7,7 @@
 
 #ifndef EMULATOR_CHIP8EMULATOR_HPP_
 #define EMULATOR_CHIP8EMULATOR_HPP_
+#include <time.h>
 
 namespace chip8 { namespace core { namespace memory
 {
@@ -50,9 +51,11 @@ namespace chip8
 		Keyboard *keyboard;
 		Display *display;
 		Font *font;
+		clock_t lastTick;
 		bool romLoaded;
 
 		void initialize();
+		void tick(); // Run the clock
 	public:
 		Chip8();
 		~Chip8();

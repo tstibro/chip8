@@ -2,3 +2,4 @@ Debug/
 Chip8emu/Debug/
 .vs/
 *.VC.db
+/Chip8emu.VC.VC.opendb

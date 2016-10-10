@@ -16,14 +16,14 @@ namespace chip8 { namespace core { namespace cpu { namespace timers
 	{
 	private:
 		u8 value;
-
-		void Tick();
 	public:
 		Timer();
 		~Timer();
 
 		void SetValue(u8 value);
 		u8 GetValue();
+
+		void Tick();
 	};
 
 }}}}

@@ -30,6 +30,14 @@ Chip8::Chip8()
 	romLoaded = false;
 }
 
+Chip8::~Chip8()
+{
+	delete keyboard;
+	delete display;
+	delete ram;
+	delete cpu;
+}
+
 void Chip8::initialize()
 {
 	keyboard = new Keyboard();
@@ -41,14 +49,20 @@ void Chip8::initialize()
 	fontLoader.LoadTo(ram, font);
 
 	cpu = new CPU(ram, display, keyboard);
+
+	lastTick = 0;
 }
 
-Chip8::~Chip8()
+void Chip8::tick()
 {
-	delete keyboard;
-	delete display;
-	delete ram;
-	delete cpu;
+	double currentMilliseconds = (double)clock() / ((double)CLOCKS_PER_SEC / 1000.0);
+
+	if (lastTick == 0)
+		lastTick = (clock_t)currentMilliseconds;
+	else if (currentMilliseconds - (double)lastTick > 1.0)
+	{
+		this->cpu->TimerTick();
+	}
 }
 
 void Chip8::CreateWindow(char *windowTitle)
@@ -71,6 +85,7 @@ void Chip8::EmulateCycle()
 		SDL_Event event;
 		while (1)
 		{
+			tick();
 			SDL_WaitEvent(&event);
 			if (event.type == SDL_QUIT)
 			{

@@ -54,6 +54,7 @@ namespace chip8 { namespace core { namespace cpu
 		stack<u16> stack;
 		Timer delayTimer;
 		Timer soundTimer;
+		u16 timerTicks;
 		GeneralPurposeRegister generalPurposeRegister[GPR_COUNT];
 		IndexRegister indexRegister;
 		ProgramCounterRegister *programCounter;
@@ -97,6 +98,7 @@ namespace chip8 { namespace core { namespace cpu
 		void SetDelayTimerValue(u8 value);
 		u8 GetDelayTimerValue();
 		void SetSoundTimerValue(u8 value);
+		void TimerTick(); 
 
 		// Returns pressed key on keyboard, or -1 when no key is pressed
 		u8 GetPressedKey();
