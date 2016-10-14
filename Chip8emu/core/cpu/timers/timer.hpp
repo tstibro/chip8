@@ -9,6 +9,8 @@
 #define CORE_CPU_TIMERS_TIMER_HPP_
 #include "../../../chip8Types.hpp"
 
+#define TIMER_FREQ 60
+
 namespace chip8 { namespace core { namespace cpu { namespace timers
 {
 

@@ -22,6 +22,7 @@ Display::Display()
 			this->pixelMatrix[y * DISPLAY_WIDTH + x] = 0;
 		}
 	}
+	shouldRefresh = true;
 }
 
 Display::~Display()
@@ -81,11 +82,14 @@ void Display::ClearScreen()
 
 void Display::Refresh()
 {
+	if (!shouldRefresh)
+		return;
+
 	for (int y = 0; y < DISPLAY_HEIGHT; y++)
 	{
 		for (int x = 0; x < DISPLAY_WIDTH; x++)
 		{
-			pixelBuffer[y * DISPLAY_WIDTH + x] = (0x00FFFFFF * pixelMatrix[y * DISPLAY_WIDTH + x]) | 0xFF000000;
+			pixelBuffer[y * DISPLAY_WIDTH + x] = (0x00FFFFFF * (u32)pixelMatrix[y * DISPLAY_WIDTH + x]) | 0xFF000000;
 		}
 	}
 	SDL_UpdateTexture(sdlTexture, NULL, pixelBuffer, DISPLAY_WIDTH * sizeof(Uint32));
@@ -93,30 +97,30 @@ void Display::Refresh()
 	SDL_RenderClear(sdlRenderer);
 	SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, NULL);
 	SDL_RenderPresent(sdlRenderer);
+
+	shouldRefresh = false;
 }
 
-u8 Display::Draw(const u8 *spriteData, u8 spriteWidth, u8 spriteHeight, u8 x, u8 y)
+u8 Display::Draw(const u8 *spriteData, u8 spriteHeight, u8 x, u8 y)
 {
 	bool pixelFlippedFrom1to0 = false;
 
 	for (int h = 0; h < spriteHeight; h++)
 	{
-		for (int w = 0; w < spriteWidth; w++)
+		u8 sprite8Pixels = spriteData[h];
+		// Dont forget byte of sprite data is actually 8 pixels
+		for (int pixel = 0; pixel < 8; pixel++)
 		{
-			u8 sprite8Pixels = spriteData[h * spriteWidth + w];
-			// Dont forget byte of sprite data is actually 8 pixels
-			for (int pixel = 0; pixel < 8; pixel++)
-			{
-				u8 spritePixel = (sprite8Pixels >> pixel) & 0x01;
-				int xCoord = ((int)x + 7 - (int)pixel + ((int)w * 8)) % DISPLAY_WIDTH;
-				int yCoord = ((int)y + ((int)h * (int)spriteWidth)) % DISPLAY_HEIGHT;
-				u8 currentPixel = pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord];
-				//If any screen pixels are flipped from set to unset 1 is returned.
-				pixelFlippedFrom1to0 = pixelFlippedFrom1to0 || (currentPixel == 1 && spritePixel == 0);
-				pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord] = currentPixel ^ spritePixel;
-			}
+			u8 spritePixel = (sprite8Pixels >> pixel) & 0x01;
+			int xCoord = ((int)x + 7 - (int)pixel) % DISPLAY_WIDTH;
+			int yCoord = ((int)y + (int)h) % DISPLAY_HEIGHT;
+			u8 currentPixel = pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord];
+			//If any screen pixels are flipped from set to unset 1 is returned.
+			pixelFlippedFrom1to0 = pixelFlippedFrom1to0 || (currentPixel == 1 && spritePixel == 0);
+			pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord] = (currentPixel ^ spritePixel) & 0x01;
 		}
 	}
+	shouldRefresh = true;
 	return pixelFlippedFrom1to0 ? 1 : 0;
 }
 

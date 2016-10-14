@@ -38,7 +38,7 @@ void DrawSpriteInstruction::Execute()
 	// Reset Index register value
 	this->cpu->WriteToIndexRegister(currentIndexRegisterValue);
 
-	u8 screenPixelFlipped = this->cpu->DrawSprite(spriteData, 1, this->spriteHeight, xCoordinate, yCoordinate);
+	u8 screenPixelFlipped = this->cpu->DrawSprite(spriteData, this->spriteHeight, xCoordinate, yCoordinate);
 	this->cpu->WriteToFlagRegister(screenPixelFlipped);
 
 	delete spriteData;

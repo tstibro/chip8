@@ -151,7 +151,7 @@ void CPU::SetSoundTimerValue(u8 value)
 
 void CPU::TimerTick()
 {
-	if (timerTicks++ > 16)
+	if (timerTicks++ > (1000.0 / TIMER_FREQ))
 	{
 		this->delayTimer.Tick();
 		this->soundTimer.Tick();
@@ -169,9 +169,9 @@ void CPU::ClearScreen()
 	this->display->ClearScreen();
 }
 
-u8 CPU::DrawSprite(u8 *spriteData, u8 spriteWidth, u8 spriteHeight, u8 x, u8 y)
+u8 CPU::DrawSprite(u8 *spriteData, u8 spriteHeight, u8 x, u8 y)
 {
-	return this->display->Draw(spriteData, spriteWidth, spriteHeight, x, y);
+	return this->display->Draw(spriteData, spriteHeight, x, y);
 }
 
 

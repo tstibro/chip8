@@ -26,6 +26,8 @@ namespace chip8 { namespace io { namespace output
 		SDL_Window *sdlWindow;
 		SDL_Renderer *sdlRenderer;
 		SDL_Texture *sdlTexture;
+
+		bool shouldRefresh;
 	public:
 		Display();
 		virtual ~Display();
@@ -38,7 +40,7 @@ namespace chip8 { namespace io { namespace output
 		// Draw sprite by writing data to pixel buffer
 		// If any screen pixels are flipped from set to unset 1 is returned.
 		// If that does not happen, 0 is returned
-		u8 Draw(const u8 *spriteData, u8 spriteWidth,u8 spriteHeight, u8 x, u8 y);
+		u8 Draw(const u8 *spriteData,u8 spriteHeight, u8 x, u8 y);
 	};
 
 }}}

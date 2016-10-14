@@ -104,7 +104,7 @@ namespace chip8 { namespace core { namespace cpu
 		u8 GetPressedKey();
 
 		void ClearScreen();
-		u8 DrawSprite(u8 *spriteData, u8 spriteWidth, u8 spriteHeight, u8 x, u8 y);
+		u8 DrawSprite(u8 *spriteData, u8 spriteHeight, u8 x, u8 y);
 	};
 
 }}}
