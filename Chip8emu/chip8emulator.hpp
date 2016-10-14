@@ -9,6 +9,8 @@
 #define EMULATOR_CHIP8EMULATOR_HPP_
 #include <time.h>
 
+#define EMULATOR_FREQ 540
+
 namespace chip8 { namespace core { namespace memory
 {
 	class RAM;
@@ -53,6 +55,7 @@ namespace chip8
 		Font *font;
 		clock_t lastTick;
 		bool romLoaded;
+		bool isRunning;
 
 		void initialize();
 		void tick(); // Run the clock

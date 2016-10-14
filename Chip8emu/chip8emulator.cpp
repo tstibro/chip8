@@ -82,17 +82,30 @@ void Chip8::EmulateCycle()
 {
 	if (romLoaded)
 	{
+		isRunning = true;
 		SDL_Event event;
-		while (1)
+		double milliseconds = (double)clock() / ((double)CLOCKS_PER_SEC / 1000.0);
+
+		while (isRunning)
 		{
-			tick();
-			SDL_WaitEvent(&event);
-			if (event.type == SDL_QUIT)
+			while (SDL_PollEvent(&event) > 0)
 			{
-				break;
+				if (event.type == SDL_QUIT)
+				{
+					isRunning = false;
+					break;
+				}
 			}
-			cpu->ExecuteInstruction();
-			display->Refresh();
+
+			double currentMilliseconds = (double)clock() / ((double)CLOCKS_PER_SEC / 1000.0);
+			if (currentMilliseconds - milliseconds > (1000.0 / EMULATOR_FREQ))
+			{
+				cpu->ExecuteInstruction();
+			}
+
+			display->Refresh();			
+			tick();
+			milliseconds = currentMilliseconds;
 		}
 	}
 }
