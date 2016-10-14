@@ -27,7 +27,7 @@ void AddVyToVxInstruction::Execute()
 	u8 registerYvalue = this->cpu->ReadFromGeneralPurposeRegister(registerYindex);
 	this->cpu->WriteToGeneralPurposeRegister(registerXindex, registerXvalue + registerYvalue);
 	//VF is set to 1 when there's a carry, and to 0 when there isn't.
-	u8 carry = (registerXvalue + registerYvalue > 255);
+	u8 carry = ((u16)registerXvalue + (u16)registerYvalue > 255) ? 1 : 0;
 	this->cpu->WriteToFlagRegister(carry);
 }
 

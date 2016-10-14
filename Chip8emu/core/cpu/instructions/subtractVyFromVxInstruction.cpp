@@ -28,7 +28,7 @@ void SubtractVyFromVxInstruction::Execute()
 	u8 newValue = registerXvalue - registerYvalue;
 	this->cpu->WriteToGeneralPurposeRegister(registerXindex, newValue);
 	// VF is set to 0 when there's a borrow, and 1 when there isn't.
-	u8 borrowFlag = (u8)(registerXvalue > registerYvalue);
+	u8 borrowFlag = (registerXvalue > registerYvalue) ? 0 : 1;
 	this->cpu->WriteToFlagRegister(borrowFlag);
 }
 

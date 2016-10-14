@@ -23,7 +23,7 @@ SetIndexRegisterToFontCharacterInVxInstruction::~SetIndexRegisterToFontCharacter
 void SetIndexRegisterToFontCharacterInVxInstruction::Execute()
 {
 	u8 fontCharacterIndex = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
-	u16 fontCharacterAddress = this->cpu->GetFontDataStartAddress() + (fontCharacterIndex * 5); // 5 bytes per character. Note: refactor this constant.
+	u16 fontCharacterAddress = this->cpu->GetFontDataStartAddress() + ((u16)fontCharacterIndex * 5); // 5 bytes per character. Note: refactor this constant.
 	this->cpu->WriteToIndexRegister(fontCharacterAddress);
 }
 
