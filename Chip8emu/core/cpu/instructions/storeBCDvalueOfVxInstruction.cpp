@@ -36,6 +36,8 @@ void StoreBCDvalueOfVxInstruction::Execute()
 
 	this->cpu->WriteToIndexRegister(address + 2);
 	this->cpu->WriteToMemory(bcdOnes);
+	// Restore Index register
+	this->cpu->WriteToIndexRegister(address);
 }
 
 void StoreBCDvalueOfVxInstruction::SetRegisterXindex(u8 registerIndex)
