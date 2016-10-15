@@ -37,7 +37,7 @@ void FontChar::SetRowData(u8 *rowData, u8 rowCount)
 void FontChar::ReSetFont(char charCode, u8 rowCount, u8 data...)
 {
 	va_list args;
-	va_start(args, data);
+	va_start(args, rowCount);
 
 	this->charCode = charCode;
 	this->rowData = new u8[rowCount];
