@@ -29,6 +29,7 @@ void FillV0toVxWithValueFromMemoryInstruction::Execute()
 		u8 newRegisterValue = this->cpu->ReadFromMemory();
 		this->cpu->WriteToGeneralPurposeRegister(currentRegisterIndex, newRegisterValue);
 	}
+	this->cpu->WriteToIndexRegister(ramAddress);
 }
 
 void FillV0toVxWithValueFromMemoryInstruction::SetRegisterXindex(u8 registerIndex)
