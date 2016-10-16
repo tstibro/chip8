@@ -116,7 +116,7 @@ u8 Display::Draw(const u8 *spriteData, u8 spriteHeight, u8 x, u8 y)
 			int yCoord = ((int)y + (int)h) % DISPLAY_HEIGHT;
 			u8 currentPixel = pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord];
 			//If any screen pixels are flipped from set to unset 1 is returned.
-			pixelFlippedFrom1to0 = pixelFlippedFrom1to0 || (currentPixel == 1 && spritePixel == 0);
+			pixelFlippedFrom1to0 = pixelFlippedFrom1to0 || (currentPixel == 1 && (currentPixel ^ spritePixel) == 0);
 			pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord] = (currentPixel ^ spritePixel) & 0x01;
 		}
 	}
