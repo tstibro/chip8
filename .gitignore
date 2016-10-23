@@ -1,5 +1,7 @@
 Debug/
+Release/
 Chip8emu/Debug/
+Chip8emu/Release/
 .vs/
 *.VC.db
 /Chip8emu.VC.VC.opendb
