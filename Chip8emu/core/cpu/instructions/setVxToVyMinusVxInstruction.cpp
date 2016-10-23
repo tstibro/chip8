@@ -25,10 +25,10 @@ void SetVxToVyMinusVxInstruction::Execute()
 {
 	u8 registerXvalue = this->cpu->ReadFromGeneralPurposeRegister(registerXindex);
 	u8 registerYvalue = this->cpu->ReadFromGeneralPurposeRegister(registerYindex);
-	u8 newValue = registerYvalue - registerXvalue;
+	u8 newValue = (u8)((i16)registerYvalue - (i16)registerXvalue);
 	this->cpu->WriteToGeneralPurposeRegister(registerXindex, newValue);
 	//VF is set to 0 when there's a borrow, and 1 when there isn't.
-	u8 borrow = (registerYvalue < registerXvalue) ? 0 : 1;
+	u8 borrow = (registerYvalue >= registerXvalue) ? 1 : 0;
 	this->cpu->WriteToFlagRegister(borrow);
 }
 
