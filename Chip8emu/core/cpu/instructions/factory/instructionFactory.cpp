@@ -145,7 +145,7 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	}
 	else if (nybbleuu == 0x01)
 	{
-		u16 address = (nybbleul << 8) | (u16)lowerByte;
+		u16 address = ((u16)nybbleul << 8) | (u16)lowerByte;
 		if (jumpInstruction == 0)
 			jumpInstruction = new JumpInstruction(address, cpu);
 		else
@@ -154,7 +154,7 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	}
 	else if (nybbleuu == 0x02)
 	{
-		u16 address = (nybbleul << 8) | (u16)lowerByte;
+		u16 address = ((u16)nybbleul << 8) | (u16)lowerByte;
 		if (callInstruction == 0)
 			callInstruction = new CallInstruction(address, cpu);
 		else
@@ -162,17 +162,6 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 		instruction = callInstruction;
 	}
 	else if (nybbleuu == 0x03)
-	{
-		if (skipNextIfVxEqualsValueInstruction == 0)
-			skipNextIfVxEqualsValueInstruction = new SkipNextIfVxEqualsValueInstruction(nybbleul, lowerByte, cpu);
-		else
-		{
-			skipNextIfVxEqualsValueInstruction->SetRegisterXindex(nybbleul);
-			skipNextIfVxEqualsValueInstruction->SetValue(lowerByte);
-		}
-		instruction = skipNextIfVxEqualsValueInstruction;
-	}
-	else if (nybbleuu == 0x04)
 	{
 		if (skipNextIfVxNotEqualsValueInstruction == 0)
 			skipNextIfVxNotEqualsValueInstruction = new SkipNextIfVxNotEqualsValueInstruction(nybbleul, lowerByte, cpu);
@@ -182,6 +171,17 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 			skipNextIfVxNotEqualsValueInstruction->SetValue(lowerByte);
 		}
 		instruction = skipNextIfVxNotEqualsValueInstruction;
+	}
+	else if (nybbleuu == 0x04)
+	{
+		if (skipNextIfVxEqualsValueInstruction == 0)
+			skipNextIfVxEqualsValueInstruction = new SkipNextIfVxEqualsValueInstruction(nybbleul, lowerByte, cpu);
+		else
+		{
+			skipNextIfVxEqualsValueInstruction->SetRegisterXindex(nybbleul);
+			skipNextIfVxEqualsValueInstruction->SetValue(lowerByte);
+		}
+		instruction = skipNextIfVxEqualsValueInstruction;
 	}
 	else if (nybbleuu == 0x05 && nybblell == 0x00)
 	{
@@ -326,7 +326,7 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	}
 	else if (nybbleuu == 0x0A)
 	{
-		u16 addressValue = (u16)(nybbleul << 8) | (u16)lowerByte;
+		u16 addressValue = ((u16)nybbleul << 8) | (u16)lowerByte;
 		if (setIndexRegisterValueInstruction == 0)
 			setIndexRegisterValueInstruction = new SetIndexRegisterValueInstruction(addressValue, cpu);
 		else
@@ -337,7 +337,7 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	}
 	else if (nybbleuu == 0x0B)
 	{
-		u16 addressValue = (u16)(nybbleul << 8) | (u16)lowerByte;
+		u16 addressValue = ((u16)nybbleul << 8) | (u16)lowerByte;
 		if (jumpToGivenAddressWithOffset == 0)
 			jumpToGivenAddressWithOffset = new JumpToGivenAddressWithOffset(addressValue, cpu);
 		else
