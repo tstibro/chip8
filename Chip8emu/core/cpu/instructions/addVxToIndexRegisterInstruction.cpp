@@ -26,8 +26,6 @@ void AddVxToIndexRegisterInstruction::Execute()
 	u16 indexRegisterValue = this->cpu->ReadFromIndexRegister();
 	u16 newValue = indexRegisterValue + registerXvalue;
 	this->cpu->WriteToIndexRegister(newValue);
-	// VF is set to 1 when range overflow (I+VX>0xFFF), and 0 when there isn't.
-	this->cpu->WriteToFlagRegister(newValue > 0xFFF ? 1 : 0);
 }
 
 void AddVxToIndexRegisterInstruction::SetRegisterXindex(u8 registerIndex)
