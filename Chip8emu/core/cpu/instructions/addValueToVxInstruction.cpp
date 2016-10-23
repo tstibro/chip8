@@ -24,7 +24,7 @@ AddValueToVxInstruction::~AddValueToVxInstruction()
 void AddValueToVxInstruction::Execute()
 {
 	u8 currentValue = cpu->ReadFromGeneralPurposeRegister(registerIndex);
-	u8 newValue = currentValue + value;
+	u8 newValue = (u8)((u16)currentValue + (u16)value);
 	cpu->WriteToGeneralPurposeRegister(registerIndex, newValue);
 }
 
