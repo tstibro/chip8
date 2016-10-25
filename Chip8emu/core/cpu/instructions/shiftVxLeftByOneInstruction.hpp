@@ -17,18 +17,20 @@ namespace chip8 { namespace core { namespace cpu
 
 namespace chip8 { namespace core { namespace cpu { namespace instructions
 {
-
-	class ShiftVxLeftByOneInstruction : public IInstruction
+	// Shifts value in Vx left by value in Vy
+	class ShiftVxLeftInstruction : public IInstruction
 	{
 	private:
 		u8 registerXindex;
+		u8 registerYindex;
 		CPU *cpu;
 	public:
-		ShiftVxLeftByOneInstruction(u8 registerXindex, CPU *cpu);
-		virtual ~ShiftVxLeftByOneInstruction();
+		ShiftVxLeftInstruction(u8 registerXindex, u8 registerYindex,CPU *cpu);
+		virtual ~ShiftVxLeftInstruction();
 		virtual void Execute();
 
 		void SetRegisterXindex(u8 registerIndex);
+		void SetRegisterYindex(u8 registerIndex);
 	};
 
 }}}}

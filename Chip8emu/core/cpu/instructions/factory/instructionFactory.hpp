@@ -37,8 +37,8 @@ namespace chip8 {
 				class SetVxToVxXorVyInstruction;
 				class SetVxToVyInstruction;
 				class SetVxToVyMinusVxInstruction;
-				class ShiftVxLeftByOneInstruction;
-				class ShiftVxRightByOneInstruction;
+				class ShiftVxLeftInstruction;
+				class ShiftVxRightInstruction;
 				class SkipIfKeyInVxIsNotPressedInstruction;
 				class SkipIfKeyInVxIsPressedInstruction;
 				class SkipNextIfVxEqualsValueInstruction;
@@ -91,8 +91,8 @@ namespace chip8 {
 					SetVxToVxXorVyInstruction *setVxToVxXorVyInstruction;
 					SetVxToVyInstruction *setVxToVyInstruction;
 					SetVxToVyMinusVxInstruction *setVxToVyMinusVxInstruction;
-					ShiftVxLeftByOneInstruction *shiftVxLeftByOneInstruction;
-					ShiftVxRightByOneInstruction *shiftVxRightByOneInstruction;
+					ShiftVxLeftInstruction *shiftVxLeftInstruction;
+					ShiftVxRightInstruction *shiftVxRightInstruction;
 					SkipIfKeyInVxIsNotPressedInstruction *skipIfKeyInVxIsNotPressedInstruction;
 					SkipIfKeyInVxIsPressedInstruction *skipIfKeyInVxIsPressedInstruction;
 					SkipNextIfVxEqualsValueInstruction *skipNextIfVxEqualsValueInstruction;

@@ -64,8 +64,8 @@ InstructionFactory::InstructionFactory(CPU *cpu)
 	setVxToVxXorVyInstruction = 0;
 	setVxToVyInstruction = 0;
 	setVxToVyMinusVxInstruction = 0;
-	shiftVxLeftByOneInstruction = 0;
-	shiftVxRightByOneInstruction = 0;
+	shiftVxLeftInstruction = 0;
+	shiftVxRightInstruction = 0;
 	skipIfKeyInVxIsNotPressedInstruction = 0;
 	skipIfKeyInVxIsPressedInstruction = 0;
 	skipNextIfVxEqualsValueInstruction = 0;
@@ -103,8 +103,8 @@ InstructionFactory::~InstructionFactory()
 	delete setVxToVxXorVyInstruction;
 	delete setVxToVyInstruction;
 	delete setVxToVyMinusVxInstruction;
-	delete shiftVxLeftByOneInstruction;
-	delete shiftVxRightByOneInstruction;
+	delete shiftVxLeftInstruction;
+	delete shiftVxRightInstruction;
 	delete skipIfKeyInVxIsNotPressedInstruction;
 	delete skipIfKeyInVxIsPressedInstruction;
 	delete skipNextIfVxEqualsValueInstruction;
@@ -284,13 +284,14 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	}
 	else if (nybbleuu == 0x08 && nybblell == 0x06)
 	{
-		if (shiftVxRightByOneInstruction == 0)
-			shiftVxRightByOneInstruction = new ShiftVxRightByOneInstruction(nybbleul, cpu);
+		if (shiftVxRightInstruction == 0)
+			shiftVxRightInstruction = new ShiftVxRightInstruction(nybbleul, nybblelu,cpu);
 		else
 		{
-			shiftVxRightByOneInstruction->SetRegisterXindex(nybbleul);
+			shiftVxRightInstruction->SetRegisterXindex(nybbleul);
+			shiftVxRightInstruction->SetRegisterYindex(nybblelu);
 		}
-		instruction = shiftVxRightByOneInstruction;
+		instruction = shiftVxRightInstruction;
 	}
 	else if (nybbleuu == 0x08 && nybblell == 0x07)
 	{
@@ -305,13 +306,14 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	}
 	else if (nybbleuu == 0x08 && nybblell == 0x0E)
 	{
-		if (shiftVxLeftByOneInstruction == 0)
-			shiftVxLeftByOneInstruction = new ShiftVxLeftByOneInstruction(nybbleul, cpu);
+		if (shiftVxLeftInstruction == 0)
+			shiftVxLeftInstruction = new ShiftVxLeftInstruction(nybbleul, nybblelu,cpu);
 		else
 		{
-			shiftVxLeftByOneInstruction->SetRegisterXindex(nybbleul);
+			shiftVxLeftInstruction->SetRegisterXindex(nybbleul);
+			shiftVxLeftInstruction->SetRegisterYindex(nybblelu);
 		}
-		instruction = shiftVxLeftByOneInstruction;
+		instruction = shiftVxLeftInstruction;
 	}
 	else if (nybbleuu == 0x09 && nybblell == 0x00)
 	{
