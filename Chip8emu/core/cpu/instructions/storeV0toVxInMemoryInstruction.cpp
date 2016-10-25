@@ -29,7 +29,7 @@ void StoreV0toVxInMemoryInstruction::Execute()
 		this->cpu->WriteToIndexRegister(ramAddress + currentRegisterIndex);
 		this->cpu->WriteToMemory(registerValue);
 	}
-	this->cpu->WriteToIndexRegister(ramAddress);
+	this->cpu->WriteToIndexRegister(ramAddress + this->registerXindex + 1);
 }
 
 void StoreV0toVxInMemoryInstruction::SetRegisterXindex(u8 registerIndex)
