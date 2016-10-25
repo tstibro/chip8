@@ -86,11 +86,7 @@ u16 CPU::LoadReturnAddress()
 void CPU::WriteToGeneralPurposeRegister(u8 registerIndex, u8 value)
 {
 	u8 safeRegisterIndex = (registerIndex % GPR_COUNT);
-	// Program cannot write to last GPR register (Flag register).
-	if (safeRegisterIndex < (GPR_COUNT - 1))
-	{
-		this->generalPurposeRegister[safeRegisterIndex].Write(value);
-	}
+    this->generalPurposeRegister[safeRegisterIndex].Write(value);
 }
 
 u8 CPU::ReadFromGeneralPurposeRegister(u8 registerIndex)
