@@ -274,11 +274,11 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	else if (nybbleuu == 0x08 && nybblell == 0x05)
 	{
 		if (subtractVyFromVxInstruction == 0)
-			subtractVyFromVxInstruction = new SubtractVyFromVxInstruction(nybbleul, nybblelu, cpu);
+			subtractVyFromVxInstruction = new SubtractVyFromVxInstruction(nybblelu, nybbleul, cpu);
 		else
 		{
-			subtractVyFromVxInstruction->SetRegisterYindex(nybbleul);
-			subtractVyFromVxInstruction->SetRegisterXindex(nybblelu);
+			subtractVyFromVxInstruction->SetRegisterYindex(nybblelu);
+			subtractVyFromVxInstruction->SetRegisterXindex(nybbleul);
 		}
 		instruction = subtractVyFromVxInstruction;
 	}
