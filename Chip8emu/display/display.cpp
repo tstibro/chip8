@@ -66,18 +66,11 @@ void Display::CreateWindow(char *windowTitle)
 
 void Display::ClearScreen()
 {
-	for(int y = 0; y < DISPLAY_HEIGHT; y++)
+	for(int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++)
 	{
-		for (int x = 0; x < DISPLAY_WIDTH; x++)
-		{
-			pixelBuffer[y * DISPLAY_WIDTH + x] = 0;
-		}
+		pixelMatrix[i] = 0;
 	}
-	SDL_UpdateTexture(sdlTexture, NULL, pixelBuffer, 64 * sizeof(Uint32));
-	// Clear screen and render
-	SDL_RenderClear(sdlRenderer);
-	SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, NULL);
-	SDL_RenderPresent(sdlRenderer);
+	shouldRefresh = true;
 }
 
 void Display::Refresh()
@@ -85,12 +78,9 @@ void Display::Refresh()
 	if (!shouldRefresh)
 		return;
 
-	for (int y = 0; y < DISPLAY_HEIGHT; y++)
+	for (int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++)
 	{
-		for (int x = 0; x < DISPLAY_WIDTH; x++)
-		{
-			pixelBuffer[y * DISPLAY_WIDTH + x] = (0x00FFFFFF * (u32)pixelMatrix[y * DISPLAY_WIDTH + x]) | 0xFF000000;
-		}
+		pixelBuffer[i] = (0x00FFFFFF * (u32)pixelMatrix[i]) | 0xFF000000;
 	}
 	SDL_UpdateTexture(sdlTexture, NULL, pixelBuffer, DISPLAY_WIDTH * sizeof(Uint32));
 	// Clear screen and render
