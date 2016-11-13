@@ -104,8 +104,8 @@ void Chip8::EmulateCycle()
 					}
 				}
 				tick(timeDelta);
-				display->Refresh();
 			}
+		    display->Refresh();
 			cpu->ExecuteInstruction();
 		}
 	}
