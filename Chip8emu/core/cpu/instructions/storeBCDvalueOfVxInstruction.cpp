@@ -25,8 +25,8 @@ void StoreBCDvalueOfVxInstruction::Execute()
 	u8 registerXvalue = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
 	// Calculate BCD
 	u8 bcdHundreds = registerXvalue / 100;
-	u8 bcdTens = (registerXvalue - bcdHundreds) / 10;
-	u8 bcdOnes = (registerXvalue - bcdHundreds - bcdTens);
+	u8 bcdTens = (registerXvalue - (bcdHundreds * 100)) / 10;
+	u8 bcdOnes = (registerXvalue - (bcdHundreds * 100) - (bcdTens * 10));
 	// Store BCD
 	u16 address = this->cpu->ReadFromIndexRegister();
 	this->cpu->WriteToMemory(bcdHundreds);
