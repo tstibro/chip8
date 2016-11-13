@@ -15,6 +15,7 @@
 #include "registers/pcreg.hpp"
 
 #define GPR_COUNT 16
+#define TIMER_TICK_INTERVAL (1000 / 60)
 
 namespace chip8 { namespace core { namespace memory
 {

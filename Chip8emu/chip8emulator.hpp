@@ -7,9 +7,10 @@
 
 #ifndef EMULATOR_CHIP8EMULATOR_HPP_
 #define EMULATOR_CHIP8EMULATOR_HPP_
-#include <time.h>
+#include <chrono>
+#include <thread>
 
-#define EMULATOR_FREQ 540
+#define INPUT_UPDATE_INTERVAL (1000 / 60)
 
 namespace chip8 { namespace core { namespace memory
 {
@@ -41,6 +42,7 @@ using namespace chip8::core::cpu;
 using namespace chip8::io::output;
 using namespace chip8::io::input;
 using namespace chip8::font;
+using namespace std;
 
 namespace chip8
 {
@@ -53,12 +55,12 @@ namespace chip8
 		Keyboard *keyboard;
 		Display *display;
 		Font *font;
-		clock_t lastTick;
+		chrono::time_point<chrono::steady_clock> lastTimePoint;
 		bool romLoaded;
 		bool isRunning;
 
 		void initialize();
-		void tick(); // Run the clock
+		void tick(long long dt); // Run the clock
 	public:
 		Chip8();
 		~Chip8();

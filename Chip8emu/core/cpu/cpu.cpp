@@ -19,6 +19,7 @@ CPU::CPU(RAM *ramMemory, Display *display, Keyboard *keyboard)
 	this->ramMemory = ramMemory;
 	this->display = display;
 	this->keyboard = keyboard;
+	this->timerTicks = 0;
 	// Lets set the starting address of programCounter right now
 	this->programCounter = new ProgramCounterRegister(ramMemory->GetProgramSegmentStartAddress());
 	instructionFactory = new InstructionFactory(this);
@@ -147,11 +148,11 @@ void CPU::SetSoundTimerValue(u8 value)
 
 void CPU::TimerTick()
 {
-	if (timerTicks++ > (1000.0 / TIMER_FREQ))
+	if (timerTicks++ > TIMER_TICK_INTERVAL)
 	{
+		timerTicks -= TIMER_TICK_INTERVAL;
 		this->delayTimer.Tick();
 		this->soundTimer.Tick();
-		timerTicks = 0;
 	}
 }
 

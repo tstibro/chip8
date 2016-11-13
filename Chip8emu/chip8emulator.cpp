@@ -49,19 +49,14 @@ void Chip8::initialize()
 	fontLoader.LoadTo(ram, font);
 
 	cpu = new CPU(ram, display, keyboard);
-
-	lastTick = 0;
 }
 
-void Chip8::tick()
+void Chip8::tick(long long dt)
 {
-	double currentMilliseconds = (double)clock() / ((double)CLOCKS_PER_SEC / 1000.0);
-
-	if (lastTick == 0)
-		lastTick = (clock_t)currentMilliseconds;
-	else if (currentMilliseconds - (double)lastTick > 1.0)
+	while (dt > 0)
 	{
 		this->cpu->TimerTick();
+		dt -= 1;
 	}
 }
 
@@ -84,28 +79,34 @@ void Chip8::EmulateCycle()
 	{
 		isRunning = true;
 		SDL_Event event;
-		double milliseconds = (double)clock() / ((double)CLOCKS_PER_SEC / 1000.0);
+		lastTimePoint = chrono::high_resolution_clock::now();
+		long long timeAcc = 0;
 
 		while (isRunning)
 		{
-			while (SDL_PollEvent(&event) > 0)
+			auto currentTime = chrono::high_resolution_clock::now();
+			auto timeDelta = chrono::duration_cast<chrono::milliseconds>(currentTime - lastTimePoint).count();
+			if (timeDelta > 0)
 			{
-				if (event.type == SDL_QUIT)
+				lastTimePoint = currentTime;
+				timeAcc += timeDelta;
+
+				if (timeAcc >= INPUT_UPDATE_INTERVAL)
 				{
-					isRunning = false;
-					break;
+					timeAcc -= INPUT_UPDATE_INTERVAL;
+					while (SDL_PollEvent(&event) > 0)
+					{
+						if (event.type == SDL_QUIT)
+						{
+							isRunning = false;
+							break;
+						}
+					}
 				}
+				tick(timeDelta);
+				display->Refresh();
 			}
-
-			double currentMilliseconds = (double)clock() / ((double)CLOCKS_PER_SEC / 1000.0);
-			if (currentMilliseconds - milliseconds > (1000.0 / EMULATOR_FREQ))
-			{
-				cpu->ExecuteInstruction();
-			}
-
-			display->Refresh();			
-			tick();
-			milliseconds = currentMilliseconds;
+			cpu->ExecuteInstruction();
 		}
 	}
 }
