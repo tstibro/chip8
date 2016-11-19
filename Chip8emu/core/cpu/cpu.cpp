@@ -55,6 +55,13 @@ void CPU::SkipNextInstruction()
 	setNextInstruction();
 }
 
+void CPU::RepeatInstruction()
+{
+	u16 currentPCaddress = programCounter->Read();
+	programCounter->JumpToAddress(currentPCaddress - 2);
+	programCounter->Lock();
+}
+
 void CPU::setNextInstruction()
 {
 	programCounter->SetNextInstruction();
@@ -156,9 +163,19 @@ void CPU::TimerTick()
 	}
 }
 
-u8 CPU::GetPressedKey()
+bool CPU::isAnyKeyPressed()
 {
-	return this->keyboard->GetPressedKey();
+	return this->keyboard->isAnyKeyPressed();
+}
+
+bool CPU::isKeyPressed(u8 keyCode)
+{
+	return this->keyboard->isKeyPressed(keyCode);
+}
+
+u8 CPU::GetLastPressedKey()
+{
+	return this->keyboard->GetLastPressedKey();
 }
 
 void CPU::ClearScreen()

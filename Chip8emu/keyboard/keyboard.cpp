@@ -10,32 +10,45 @@ using namespace chip8::io::input;
 
 Keyboard::Keyboard()
 {
+	for (u8 i = 0; i < KEY_MATRIX_SIZE; i++)
+	{
+		pressedKeyMatrix[i] = false;
+	}
+	numberOfPressedKeys = 0;
 }
 
 Keyboard::~Keyboard()
 {
 }
 
-void Keyboard::KeyPressed(u8 keyCode)
+void Keyboard::UpdateKeyState(u8 keyCode, bool pressed)
 {
 	u8 safeKeyCode = (keyCode % KEY_MATRIX_SIZE);
-	pressedKeyMatrix[safeKeyCode] = true;
+	pressedKeyMatrix[safeKeyCode] = pressed;
+	if (pressed)
+		numberOfPressedKeys++;
+	else
+		numberOfPressedKeys--;
 }
 
-void Keyboard::KeyReleased(u8 keyCode)
+bool Keyboard::isKeyPressed(u8 keyCode)
 {
 	u8 safeKeyCode = (keyCode % KEY_MATRIX_SIZE);
-	pressedKeyMatrix[safeKeyCode] = false;
+	return pressedKeyMatrix[safeKeyCode];
 }
 
-u8 Keyboard::GetPressedKey()
+bool Keyboard::isAnyKeyPressed()
 {
-	for(u8 i = 0; i < KEY_MATRIX_SIZE; i++)
+	return (numberOfPressedKeys > 0);
+}
+
+u8 Keyboard::GetLastPressedKey()
+{
+	if (numberOfPressedKeys > 0)
 	{
-		if (pressedKeyMatrix[i])
-			return i;
+		return lastPressedKey;
 	}
-	return NO_KEY_PRESSED_RETURN_VALUE;
+	return NO_KEY_PRESSED;
 }
 
 

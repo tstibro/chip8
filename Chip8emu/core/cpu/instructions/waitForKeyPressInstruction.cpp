@@ -22,11 +22,15 @@ WaitForKeyPressInstruction::~WaitForKeyPressInstruction()
 
 void WaitForKeyPressInstruction::Execute()
 {
-	u8 pressedKey;
-	while((pressedKey = this->cpu->GetPressedKey()) == -1)
+	if (!this->cpu->isAnyKeyPressed())
 	{
+		this->cpu->RepeatInstruction();
 	}
-	this->cpu->WriteToGeneralPurposeRegister(this->registerXindex, pressedKey);
+	else
+	{
+		u8 pressedKey = this->cpu->GetLastPressedKey();
+		this->cpu->WriteToGeneralPurposeRegister(this->registerXindex, pressedKey);
+	}
 }
 
 void WaitForKeyPressInstruction::SetRegisterXindex(u8 registerIndex)

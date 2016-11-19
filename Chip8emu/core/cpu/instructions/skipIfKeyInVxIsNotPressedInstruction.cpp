@@ -23,9 +23,8 @@ SkipIfKeyInVxIsNotPressedInstruction::~SkipIfKeyInVxIsNotPressedInstruction()
 void SkipIfKeyInVxIsNotPressedInstruction::Execute()
 {
 	u8 targetKeyCode = this->cpu->ReadFromGeneralPurposeRegister(this->registerXindex);
-	u8 pressedKeyCode = this->cpu->GetPressedKey();
 
-	if (targetKeyCode != pressedKeyCode)
+	if (!this->cpu->isKeyPressed(targetKeyCode))
 	{
 		this->cpu->SkipNextInstruction();
 	}

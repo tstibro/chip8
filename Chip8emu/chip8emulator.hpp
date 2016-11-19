@@ -9,6 +9,7 @@
 #define EMULATOR_CHIP8EMULATOR_HPP_
 #include <chrono>
 #include <thread>
+#include <SDL.h>
 
 #define INPUT_UPDATE_INTERVAL (1000 / 60)
 
@@ -61,6 +62,7 @@ namespace chip8
 
 		void initialize();
 		void tick(long long dt); // Run the clock
+		void updateKeys(const SDL_KeyboardEvent keyboardEvent);
 	public:
 		Chip8();
 		~Chip8();

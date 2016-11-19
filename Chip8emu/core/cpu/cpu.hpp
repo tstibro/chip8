@@ -75,6 +75,8 @@ namespace chip8 { namespace core { namespace cpu
 		void ExecuteInstruction();
 		// Skip instruction by incrementing PC
 		void SkipNextInstruction();
+		// Repeats current instruction
+		void RepeatInstruction();
 		// Moves flow control to given address. Address is validated.
 		void JumpToAddress(u16 address);
 		// Saves address PC+2 to Stack
@@ -101,8 +103,9 @@ namespace chip8 { namespace core { namespace cpu
 		void SetSoundTimerValue(u8 value);
 		void TimerTick(); 
 
-		// Returns pressed key on keyboard, or -1 when no key is pressed
-		u8 GetPressedKey();
+		bool isAnyKeyPressed();
+		bool isKeyPressed(u8 keyCode);
+		u8 GetLastPressedKey();
 
 		void ClearScreen();
 		u8 DrawSprite(u8 *spriteData, u8 spriteHeight, u8 x, u8 y);

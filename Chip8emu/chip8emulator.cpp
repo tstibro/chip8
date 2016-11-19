@@ -7,7 +7,6 @@
 #include "chip8emulator.hpp"
 #include <iostream>
 #include <fstream>
-#include <SDL.h>
 
 #include "chip8Types.hpp"
 #include "core/cpu/cpu.hpp"
@@ -60,6 +59,70 @@ void Chip8::tick(long long dt)
 	}
 }
 
+/* Keyboard Layout
+
+   1 2 3 C       7 8 9 Q
+   4 5 6 D   =>  4 5 6 W
+   7 8 9 E       1 2 3 E
+   A 0 B F       A 0 S F
+
+*/
+void Chip8::updateKeys(const SDL_KeyboardEvent keyboardEvent)
+{
+	bool isKeyPressed = keyboardEvent.type == SDL_KEYDOWN;
+	switch (keyboardEvent.keysym.scancode)
+	{
+	case SDL_SCANCODE_KP_0:
+		keyboard->UpdateKeyState(0, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_1:
+		keyboard->UpdateKeyState(7, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_2:
+		keyboard->UpdateKeyState(8, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_3:
+		keyboard->UpdateKeyState(9, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_4:
+		keyboard->UpdateKeyState(4, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_5:
+		keyboard->UpdateKeyState(5, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_6:
+		keyboard->UpdateKeyState(6, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_7:
+		keyboard->UpdateKeyState(1, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_8:
+		keyboard->UpdateKeyState(2, isKeyPressed);
+		break;
+	case SDL_SCANCODE_KP_9:
+		keyboard->UpdateKeyState(3, isKeyPressed);
+		break;
+	case SDL_SCANCODE_Q:
+		keyboard->UpdateKeyState(0x0d, isKeyPressed);
+		break;
+	case SDL_SCANCODE_W:
+		keyboard->UpdateKeyState(0x0c, isKeyPressed);
+		break;
+	case SDL_SCANCODE_E:
+		keyboard->UpdateKeyState(0x0e, isKeyPressed);
+		break;
+	case SDL_SCANCODE_F:
+		keyboard->UpdateKeyState(0x0f, isKeyPressed);
+		break;
+	case SDL_SCANCODE_S:
+		keyboard->UpdateKeyState(0x0b, isKeyPressed);
+		break;
+	case SDL_SCANCODE_A:
+		keyboard->UpdateKeyState(0x0a, isKeyPressed);
+		break;
+	}
+}
+
 void Chip8::CreateWindow(char *windowTitle)
 {
 	display->CreateWindow(windowTitle);
@@ -100,6 +163,10 @@ void Chip8::EmulateCycle()
 						{
 							isRunning = false;
 							break;
+						}
+						else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+						{
+							updateKeys(event.key);
 						}
 					}
 				}

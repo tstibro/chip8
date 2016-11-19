@@ -10,7 +10,7 @@
 #include "../chip8Types.hpp"
 
 #define KEY_MATRIX_SIZE 16
-#define NO_KEY_PRESSED_RETURN_VALUE -1
+#define NO_KEY_PRESSED 0xff
 
 namespace chip8 { namespace io { namespace input
 {
@@ -19,14 +19,17 @@ namespace chip8 { namespace io { namespace input
 	{
 	private:
 		bool pressedKeyMatrix[KEY_MATRIX_SIZE];
+		u8 numberOfPressedKeys;
+		u8 lastPressedKey;
 	public:
 		Keyboard();
 		virtual ~Keyboard();
 
-		void KeyPressed(u8 keyCode);
-		void KeyReleased(u8 keyCode);
+		void UpdateKeyState(u8 keyCode, bool pressed);
 
-		u8 GetPressedKey();
+		bool isKeyPressed(u8 keyCode);
+		bool isAnyKeyPressed();
+		u8 GetLastPressedKey();
 	};
 
 }}}
