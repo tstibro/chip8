@@ -285,11 +285,10 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	else if (nybbleuu == 0x08 && nybblell == 0x06)
 	{
 		if (shiftVxRightInstruction == 0)
-			shiftVxRightInstruction = new ShiftVxRightInstruction(nybbleul, nybblelu,cpu);
+			shiftVxRightInstruction = new ShiftVxRightInstruction(nybbleul,cpu);
 		else
 		{
 			shiftVxRightInstruction->SetRegisterXindex(nybbleul);
-			shiftVxRightInstruction->SetRegisterYindex(nybblelu);
 		}
 		instruction = shiftVxRightInstruction;
 	}
@@ -307,11 +306,10 @@ IInstruction *InstructionFactory::Create(u16 rawInstructionData)
 	else if (nybbleuu == 0x08 && nybblell == 0x0E)
 	{
 		if (shiftVxLeftInstruction == 0)
-			shiftVxLeftInstruction = new ShiftVxLeftInstruction(nybbleul, nybblelu,cpu);
+			shiftVxLeftInstruction = new ShiftVxLeftInstruction(nybbleul,cpu);
 		else
 		{
 			shiftVxLeftInstruction->SetRegisterXindex(nybbleul);
-			shiftVxLeftInstruction->SetRegisterYindex(nybblelu);
 		}
 		instruction = shiftVxLeftInstruction;
 	}
