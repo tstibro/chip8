@@ -57,8 +57,8 @@ void CPU::SkipNextInstruction()
 
 void CPU::RepeatInstruction()
 {
-	u16 currentPCaddress = programCounter->Read();
-	programCounter->JumpToAddress(currentPCaddress - 2);
+	// When an instruction calls this method, PC register is not incremented 
+	// at the end of ExecuteInstruction, thus current instruction will be repeated
 	programCounter->Lock();
 }
 
