@@ -16,6 +16,7 @@
 #include "font/font.hpp"
 #include "keyboard/keyboard.hpp"
 #include "display/display.hpp"
+#include "audio/audio.hpp"
 
 using namespace std;
 using namespace chip8::core::cpu;
@@ -33,6 +34,7 @@ Chip8::~Chip8()
 {
 	delete keyboard;
 	delete display;
+	delete audio;
 	delete ram;
 	delete cpu;
 }
@@ -41,6 +43,16 @@ void Chip8::initialize()
 {
 	keyboard = new Keyboard();
 	display = new Display();
+	try
+	{
+		audio = new Audio("..\\Debug\\beepsfx.wav");
+	}
+	catch (runtime_error e)
+	{
+		// Disable audio
+		audio = NULL;
+	}
+	playAudio = false;
 
 	ram = new RAM();
 	FontLoader fontLoader;
@@ -123,6 +135,25 @@ void Chip8::updateKeys(const SDL_KeyboardEvent keyboardEvent)
 	}
 }
 
+void Chip8::updateAudio()
+{
+	// Audio might not be initialized
+	if (audio != NULL)
+	{
+		// When sound timer is not 0, sound is played
+		u8 soundTimerValue = cpu->GetSoundTimerValue();
+		if (soundTimerValue != 0 && playAudio)
+		{
+			audio->Play();
+			playAudio = false;
+		}
+		if (soundTimerValue == 0)
+		{
+			playAudio = true;
+		}
+	}
+}
+
 void Chip8::CreateWindow(char *windowTitle)
 {
 	display->CreateWindow(windowTitle);
@@ -173,6 +204,7 @@ void Chip8::EmulateCycle()
 				tick(timeDelta);
 			}
 		    display->Refresh();
+			updateAudio();
 			cpu->ExecuteInstruction();
 		}
 	}

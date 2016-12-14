@@ -6,3 +6,6 @@ I wanted to see how hard is it to make na emulator (even easy one like this).
 
 <img src="invadersDemo.gif" alt="Chip8 Emulator - Space Invaders Demo" height="351" width="641" />
 
+Attributions:
+Beep Sound: https://www.freesound.org/people/unfa/sounds/215416/
+

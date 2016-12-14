@@ -150,6 +150,9 @@
     <ClInclude Include="core\cpu\instructions\factory\instructionFactory.hpp">
       <Filter>core\cpu\instructions\factory</Filter>
     </ClInclude>
+    <ClInclude Include="audio\audio.hpp">
+      <Filter>audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -301,6 +304,9 @@
     <ClCompile Include="core\cpu\instructions\factory\instructionFactory.cpp">
       <Filter>core\cpu\instructions\factory</Filter>
     </ClCompile>
+    <ClCompile Include="audio\audio.cpp">
+      <Filter>audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="font">
@@ -333,5 +339,19 @@
     <Filter Include="core\cpu\instructions\factory">
       <UniqueIdentifier>{0ef2f179-9cb5-46d4-b1c7-9dbd9f0896bc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="audio">
+      <UniqueIdentifier>{a36ef50c-39be-4f4a-803f-3430eb8d40a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources">
+      <UniqueIdentifier>{8bee163b-bb25-4f6e-a61d-62a261959789}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resources\audio">
+      <UniqueIdentifier>{35e2ec5e-7b54-4099-95ad-391bfed0f54e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="..\Resources\audio\beep.wav">
+      <Filter>resources\audio</Filter>
+    </Media>
   </ItemGroup>
 </Project>

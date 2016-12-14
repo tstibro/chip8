@@ -153,6 +153,11 @@ void CPU::SetSoundTimerValue(u8 value)
 	this->soundTimer.SetValue(value);
 }
 
+u8 CPU::GetSoundTimerValue()
+{
+	return this->soundTimer.GetValue();
+}
+
 void CPU::TimerTick()
 {
 	if (timerTicks++ > TIMER_TICK_INTERVAL)

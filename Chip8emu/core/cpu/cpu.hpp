@@ -101,6 +101,7 @@ namespace chip8 { namespace core { namespace cpu
 		void SetDelayTimerValue(u8 value);
 		u8 GetDelayTimerValue();
 		void SetSoundTimerValue(u8 value);
+		u8 GetSoundTimerValue();
 		void TimerTick(); 
 
 		bool isAnyKeyPressed();

@@ -26,6 +26,7 @@ namespace chip8 { namespace core { namespace cpu
 namespace chip8 { namespace io { namespace output
 {
 	class Display;
+	class Audio;
 }}}
 
 namespace chip8 { namespace io { namespace input
@@ -55,6 +56,8 @@ namespace chip8
 		CPU *cpu;
 		Keyboard *keyboard;
 		Display *display;
+		Audio *audio;
+		bool playAudio;
 		Font *font;
 		chrono::time_point<chrono::steady_clock> lastTimePoint;
 		bool romLoaded;
@@ -63,6 +66,7 @@ namespace chip8
 		void initialize();
 		void tick(long long dt); // Run the clock
 		void updateKeys(const SDL_KeyboardEvent keyboardEvent);
+		void updateAudio();
 	public:
 		Chip8();
 		~Chip8();
