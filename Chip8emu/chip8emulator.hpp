@@ -1,9 +1,9 @@
 /*
- * chip8emulator.hpp
- *
- *  Created on: Aug 7, 2016
- *      Author: Tomas Stibrany
- */
+* chip8emulator.hpp
+*
+*  Created on: Aug 7, 2016
+*      Author: Tomas Stibrany
+*/
 
 #ifndef EMULATOR_CHIP8EMULATOR_HPP_
 #define EMULATOR_CHIP8EMULATOR_HPP_
@@ -13,31 +13,49 @@
 
 #define INPUT_UPDATE_INTERVAL (1000 / 60)
 
-namespace chip8 { namespace core { namespace memory
-{
-	class RAM;
-}}}
+namespace chip8 {
+	namespace core {
+		namespace memory
+		{
+			class RAM;
+		}
+	}
+}
 
-namespace chip8 { namespace core { namespace cpu
-{
-	class CPU;
-}}}
+namespace chip8 {
+	namespace core {
+		namespace cpu
+		{
+			class CPU;
+		}
+	}
+}
 
-namespace chip8 { namespace io { namespace output
-{
-	class Display;
-	class Audio;
-}}}
+namespace chip8 {
+	namespace io {
+		namespace output
+		{
+			class Display;
+			class Audio;
+		}
+	}
+}
 
-namespace chip8 { namespace io { namespace input
-{
-	class Keyboard;
-}}}
+namespace chip8 {
+	namespace io {
+		namespace input
+		{
+			class Keyboard;
+		}
+	}
+}
 
-namespace chip8 { namespace font
-{
-	class Font;
-}}
+namespace chip8 {
+	namespace font
+	{
+		class Font;
+	}
+}
 
 using namespace chip8::core::memory;
 using namespace chip8::core::cpu;
@@ -64,9 +82,11 @@ namespace chip8
 		bool isRunning;
 
 		void initialize();
-		void tick(long long dt); // Run the clock
+		void updateTimers(long long dt); // Run the clock
 		void updateKeys(const SDL_KeyboardEvent keyboardEvent);
 		void updateAudio();
+		void updateVideo();
+		void handleEvents();
 	public:
 		Chip8();
 		~Chip8();

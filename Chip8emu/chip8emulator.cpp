@@ -1,9 +1,9 @@
 /*
- * chip8emulator.cpp
- *
- *  Created on: Aug 7, 2016
- *      Author: Tomas Stibrany
- */
+* chip8emulator.cpp
+*
+*  Created on: Aug 7, 2016
+*      Author: Tomas Stibrany
+*/
 #include "chip8emulator.hpp"
 #include <iostream>
 #include <fstream>
@@ -62,7 +62,7 @@ void Chip8::initialize()
 	cpu = new CPU(ram, display, keyboard);
 }
 
-void Chip8::tick(long long dt)
+void Chip8::updateTimers(long long dt)
 {
 	while (dt > 0)
 	{
@@ -73,10 +73,10 @@ void Chip8::tick(long long dt)
 
 /* Keyboard Layout
 
-   1 2 3 C       7 8 9 Q
-   4 5 6 D   =>  4 5 6 W
-   7 8 9 E       1 2 3 E
-   A 0 B F       A 0 S F
+1 2 3 C       7 8 9 Q
+4 5 6 D   =>  4 5 6 W
+7 8 9 E       1 2 3 E
+A 0 B F       A 0 S F
 
 */
 void Chip8::updateKeys(const SDL_KeyboardEvent keyboardEvent)
@@ -154,6 +154,28 @@ void Chip8::updateAudio()
 	}
 }
 
+void Chip8::updateVideo()
+{
+	display->Refresh();
+}
+
+void Chip8::handleEvents()
+{
+	SDL_Event event;
+	while (SDL_PollEvent(&event) > 0)
+	{
+		if (event.type == SDL_QUIT)
+		{
+			isRunning = false;
+			break;
+		}
+		else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+		{
+			updateKeys(event.key);
+		}
+	}
+}
+
 void Chip8::CreateWindow(char *windowTitle)
 {
 	display->CreateWindow(windowTitle);
@@ -172,7 +194,6 @@ void Chip8::EmulateCycle()
 	if (romLoaded)
 	{
 		isRunning = true;
-		SDL_Event event;
 		lastTimePoint = chrono::high_resolution_clock::now();
 		long long timeAcc = 0;
 
@@ -188,23 +209,12 @@ void Chip8::EmulateCycle()
 				if (timeAcc >= INPUT_UPDATE_INTERVAL)
 				{
 					timeAcc -= INPUT_UPDATE_INTERVAL;
-					while (SDL_PollEvent(&event) > 0)
-					{
-						if (event.type == SDL_QUIT)
-						{
-							isRunning = false;
-							break;
-						}
-						else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
-						{
-							updateKeys(event.key);
-						}
-					}
+					handleEvents();
 				}
-				tick(timeDelta);
+				updateTimers(timeDelta);
 			}
-		    display->Refresh();
 			updateAudio();
+			updateVideo();
 			cpu->ExecuteInstruction();
 		}
 	}
