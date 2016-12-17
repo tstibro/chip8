@@ -32,6 +32,15 @@ namespace chip8 {
 }
 
 namespace chip8 {
+	namespace core {
+		namespace gpu
+		{
+			class GPU;
+		}
+	}
+}
+
+namespace chip8 {
 	namespace io {
 		namespace output
 		{
@@ -59,6 +68,7 @@ namespace chip8 {
 
 using namespace chip8::core::memory;
 using namespace chip8::core::cpu;
+using namespace chip8::core::gpu;
 using namespace chip8::io::output;
 using namespace chip8::io::input;
 using namespace chip8::font;
@@ -72,6 +82,8 @@ namespace chip8
 	private:
 		RAM *ram;
 		CPU *cpu;
+		GPU *gpu;
+		unsigned char *gpuExchangeBuffer;
 		Keyboard *keyboard;
 		Display *display;
 		Audio *audio;

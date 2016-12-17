@@ -10,6 +10,7 @@
 
 #include "chip8Types.hpp"
 #include "core/cpu/cpu.hpp"
+#include "core/gpu/gpu.hpp"
 #include "core/memory/ram.hpp"
 #include "core/memory/programLoader.hpp"
 #include "font/fontLoader.hpp"
@@ -20,6 +21,7 @@
 
 using namespace std;
 using namespace chip8::core::cpu;
+using namespace chip8::core::gpu;
 using namespace chip8::core::memory;
 using namespace chip8::font;
 using namespace chip8;
@@ -36,13 +38,17 @@ Chip8::~Chip8()
 	delete display;
 	delete audio;
 	delete ram;
+	delete gpuExchangeBuffer;
+	delete gpu;
 	delete cpu;
 }
 
 void Chip8::initialize()
 {
 	keyboard = new Keyboard();
-	display = new Display();
+	gpu = new GPU();
+	gpuExchangeBuffer = new u8[gpu->GetWidth() * gpu->GetHeight()];
+	display = new Display(gpu->GetWidth(), gpu->GetHeight(), 10);
 	try
 	{
 		audio = new Audio("..\\Debug\\beepsfx.wav");
@@ -59,7 +65,7 @@ void Chip8::initialize()
 	font = new Font();
 	fontLoader.LoadTo(ram, font);
 
-	cpu = new CPU(ram, display, keyboard);
+	cpu = new CPU(ram, gpu, keyboard);
 }
 
 void Chip8::updateTimers(long long dt)
@@ -156,7 +162,15 @@ void Chip8::updateAudio()
 
 void Chip8::updateVideo()
 {
-	display->Refresh();
+	if (gpu->IsRefreshRequested())
+	{
+		u8 width = gpu->GetWidth();
+		u8 height = gpu->GetHeight();
+
+		gpu->GetPixels(gpuExchangeBuffer);
+		display->RefreshFrom(gpuExchangeBuffer, width * height);
+		gpu->ResetRefreshRequest();
+	}
 }
 
 void Chip8::handleEvents()
@@ -179,7 +193,6 @@ void Chip8::handleEvents()
 void Chip8::CreateWindow(char *windowTitle)
 {
 	display->CreateWindow(windowTitle);
-	display->ClearScreen();
 }
 
 void Chip8::LoadROM(char *filePath)

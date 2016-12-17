@@ -153,6 +153,7 @@
     <ClInclude Include="audio\audio.hpp">
       <Filter>audio</Filter>
     </ClInclude>
+    <ClInclude Include="core\gpu\gpu.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -307,6 +308,7 @@
     <ClCompile Include="audio\audio.cpp">
       <Filter>audio</Filter>
     </ClCompile>
+    <ClCompile Include="core\gpu\gpu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="font">
@@ -347,6 +349,9 @@
     </Filter>
     <Filter Include="resources\audio">
       <UniqueIdentifier>{35e2ec5e-7b54-4099-95ad-391bfed0f54e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="core\gpu">
+      <UniqueIdentifier>{b685e1cc-a5d5-49d7-ac74-7bb8ae397e74}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

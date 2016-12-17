@@ -209,6 +209,7 @@ copy /Y "$(SolutionDir)resources\libraries\SDL2_mixer.dll" "$(TargetDir)SDL2_mix
     <ClInclude Include="core\cpu\registers\pcreg.hpp" />
     <ClInclude Include="core\cpu\registers\ri.hpp" />
     <ClInclude Include="core\cpu\timers\timer.hpp" />
+    <ClInclude Include="core\gpu\gpu.hpp" />
     <ClInclude Include="core\memory\programLoader.hpp" />
     <ClInclude Include="core\memory\ram.hpp" />
     <ClInclude Include="display\display.hpp" />
@@ -262,6 +263,7 @@ copy /Y "$(SolutionDir)resources\libraries\SDL2_mixer.dll" "$(TargetDir)SDL2_mix
     <ClCompile Include="core\cpu\registers\pcreg.cpp" />
     <ClCompile Include="core\cpu\registers\ri.cpp" />
     <ClCompile Include="core\cpu\timers\timer.cpp" />
+    <ClCompile Include="core\gpu\gpu.cpp" />
     <ClCompile Include="core\memory\programLoader.cpp" />
     <ClCompile Include="core\memory\ram.cpp" />
     <ClCompile Include="display\display.cpp" />

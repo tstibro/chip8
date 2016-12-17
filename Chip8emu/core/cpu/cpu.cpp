@@ -9,15 +9,15 @@
 #include "instructions/iinstruction.hpp"
 #include "instructions/factory/instructionFactory.hpp"
 #include "../../keyboard/keyboard.hpp"
-#include "../../display/display.hpp"
+#include "../gpu/gpu.hpp"
 
 using chip8::core::cpu::CPU;
 using namespace chip8::core::cpu::instructions;
 
-CPU::CPU(RAM *ramMemory, Display *display, Keyboard *keyboard)
+CPU::CPU(RAM *ramMemory, GPU *gpu, Keyboard *keyboard)
 {
 	this->ramMemory = ramMemory;
-	this->display = display;
+	this->gpu = gpu;
 	this->keyboard = keyboard;
 	this->timerTicks = 0;
 	// Lets set the starting address of programCounter right now
@@ -185,12 +185,12 @@ u8 CPU::GetLastPressedKey()
 
 void CPU::ClearScreen()
 {
-	this->display->ClearScreen();
+	this->gpu->ClearScreen();
 }
 
 u8 CPU::DrawSprite(u8 *spriteData, u8 spriteHeight, u8 x, u8 y)
 {
-	return this->display->Draw(spriteData, spriteHeight, x, y);
+	return this->gpu->Draw(spriteData, spriteHeight, x, y);
 }
 
 

@@ -22,9 +22,9 @@ namespace chip8 { namespace core { namespace memory
 	class RAM;
 }}}
 
-namespace chip8 { namespace io { namespace output
+namespace chip8 { namespace core { namespace gpu
 {
-	class Display;
+	class GPU;
 }}}
 
 namespace chip8 { namespace io { namespace input
@@ -42,7 +42,7 @@ using namespace chip8::core::cpu::instructions;
 using namespace chip8::core::cpu::registers;
 using namespace chip8::core::cpu::timers;
 using namespace chip8::core::memory;
-using namespace chip8::io::output;
+using namespace chip8::core::gpu;
 using namespace chip8::io::input;
 using namespace std;
 
@@ -62,13 +62,13 @@ namespace chip8 { namespace core { namespace cpu
 		InstructionFactory *instructionFactory;
 
 		Keyboard *keyboard;
-		Display *display;
+		GPU *gpu;
 
 		u16 loadInstruction();
 		void setNextInstruction();
 	public:
 		// Default constructor
-		CPU(RAM *ramMemory, Display *display, Keyboard *keyboard);
+		CPU(RAM *ramMemory, GPU *gpu, Keyboard *keyboard);
 		// Destructor
 		~CPU();
 		// Loads and Executes instruction

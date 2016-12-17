@@ -10,23 +10,25 @@
 using namespace std;
 using chip8::io::output::Display;
 
-Display::Display()
+Display::Display(int width, int height, int scale)
 {
 	sdlWindow = 0;
 	sdlRenderer = 0;
-	for (int y = 0; y < DISPLAY_HEIGHT; y++)
+
+	displayWidth = width;
+	displayHeight = height;
+	displayScale = scale;
+
+	pixelBuffer = new u32[displayWidth * displayHeight];
+	for (int i = 0; i < displayWidth * displayHeight; i++)
 	{
-		for (int x = 0; x < DISPLAY_WIDTH; x++)
-		{
-			this->pixelBuffer[y * DISPLAY_WIDTH + x] = 0;
-			this->pixelMatrix[y * DISPLAY_WIDTH + x] = 0;
-		}
+		pixelBuffer[i] = 0;
 	}
-	shouldRefresh = true;
 }
 
 Display::~Display()
 {
+	delete pixelBuffer;
 	SDL_DestroyTexture(sdlTexture);
 	SDL_DestroyRenderer(sdlRenderer);
 	SDL_DestroyWindow(sdlWindow);
@@ -39,7 +41,7 @@ void Display::CreateWindow(char *windowTitle)
 		throw runtime_error(string("SDL_Init Error: ") + SDL_GetError());
 	}
 
-	sdlWindow = SDL_CreateWindow(windowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, DISPLAY_WIDTH * DISPLAY_WINDOW_SCALE, DISPLAY_HEIGHT * DISPLAY_WINDOW_SCALE, SDL_WINDOW_SHOWN);
+	sdlWindow = SDL_CreateWindow(windowTitle, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, displayWidth * displayScale, displayHeight * displayScale, SDL_WINDOW_SHOWN);
 	if (sdlWindow == nullptr){
 		const char *sdlError = SDL_GetError();
 		SDL_Quit();
@@ -53,9 +55,9 @@ void Display::CreateWindow(char *windowTitle)
 		SDL_Quit();
 		throw runtime_error(string("SDL_CreateRenderer Error: ") + sdlError);
 	}
-	SDL_RenderSetLogicalSize(sdlRenderer, DISPLAY_WIDTH * DISPLAY_WINDOW_SCALE, DISPLAY_HEIGHT * DISPLAY_WINDOW_SCALE);
+	SDL_RenderSetLogicalSize(sdlRenderer, displayWidth * displayScale, displayHeight * displayScale);
 
-	sdlTexture = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_STREAMING, DISPLAY_WIDTH, DISPLAY_HEIGHT);
+	sdlTexture = SDL_CreateTexture(sdlRenderer, SDL_PIXELFORMAT_ARGB8888,SDL_TEXTUREACCESS_STREAMING, displayWidth, displayHeight);
 	if (sdlRenderer == nullptr)
 	{
 		const char *sdlError = SDL_GetError();
@@ -64,54 +66,20 @@ void Display::CreateWindow(char *windowTitle)
 	}
 }
 
-void Display::ClearScreen()
+void Display::RefreshFrom(u8 *sourceData, int dataCount)
 {
-	for(int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++)
-	{
-		pixelMatrix[i] = 0;
-	}
-	shouldRefresh = true;
-}
-
-void Display::Refresh()
-{
-	if (!shouldRefresh)
+	if (dataCount != displayWidth * displayHeight)
 		return;
 
-	for (int i = 0; i < DISPLAY_WIDTH * DISPLAY_HEIGHT; i++)
+	for (int i = 0; i < dataCount; i++)
 	{
-		pixelBuffer[i] = (0x00FFFFFF * (u32)pixelMatrix[i]) | 0xFF000000;
+		pixelBuffer[i] = (0x00FFFFFF * (u32)sourceData[i]) | 0xFF000000;
 	}
-	SDL_UpdateTexture(sdlTexture, NULL, pixelBuffer, DISPLAY_WIDTH * sizeof(Uint32));
+	SDL_UpdateTexture(sdlTexture, NULL, pixelBuffer, displayWidth * sizeof(Uint32));
 	// Clear screen and render
 	SDL_RenderClear(sdlRenderer);
 	SDL_RenderCopy(sdlRenderer, sdlTexture, NULL, NULL);
 	SDL_RenderPresent(sdlRenderer);
-
-	shouldRefresh = false;
-}
-
-u8 Display::Draw(const u8 *spriteData, u8 spriteHeight, u8 x, u8 y)
-{
-	bool pixelFlippedFrom1to0 = false;
-
-	for (int h = 0; h < spriteHeight; h++)
-	{
-		u8 sprite8Pixels = spriteData[h];
-		// Dont forget byte of sprite data is actually 8 pixels
-		for (int pixel = 0; pixel < 8; pixel++)
-		{
-			u8 spritePixel = (sprite8Pixels >> pixel) & 0x01;
-			int xCoord = ((int)x + 7 - (int)pixel) % DISPLAY_WIDTH;
-			int yCoord = ((int)y + (int)h) % DISPLAY_HEIGHT;
-			u8 currentPixel = pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord];
-			//If any screen pixels are flipped from set to unset 1 is returned.
-			pixelFlippedFrom1to0 = pixelFlippedFrom1to0 || (currentPixel == 1 && (currentPixel ^ spritePixel) == 0);
-			pixelMatrix[yCoord * DISPLAY_WIDTH + xCoord] = (currentPixel ^ spritePixel) & 0x01;
-		}
-	}
-	shouldRefresh = true;
-	return pixelFlippedFrom1to0 ? 1 : 0;
 }
 
 
