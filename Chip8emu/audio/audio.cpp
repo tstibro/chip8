@@ -8,9 +8,8 @@
 #include <stdexcept>
 
 using namespace std;
-using chip8::io::output::Audio;
 
-Audio::Audio(char *wavFilePath)
+SDLAudio::SDLAudio(char *wavFilePath)
 {
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
 		throw runtime_error(string("SDL_Init Error: ") + SDL_GetError());
@@ -28,14 +27,14 @@ Audio::Audio(char *wavFilePath)
 	}
 }
 
-Audio::~Audio()
+SDLAudio::~SDLAudio()
 {
 	Mix_FreeChunk(sound);
 	//Quit SDL_mixer
 	Mix_CloseAudio();
 }
 
-void Audio::Play()
+void SDLAudio::PlaySound()
 {
 	if (Mix_PlayingMusic() == 0)
 	{
@@ -43,7 +42,7 @@ void Audio::Play()
 	}
 }
 
-void Audio::Stop()
+void SDLAudio::Stop()
 {
 	Mix_HaltMusic();
 }

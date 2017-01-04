@@ -8,9 +8,8 @@
 #include <stdexcept>
 
 using namespace std;
-using chip8::io::output::Display;
 
-Display::Display(int width, int height, int scale)
+SDLDisplay::SDLDisplay(int width, int height, int scale)
 {
 	sdlWindow = 0;
 	sdlRenderer = 0;
@@ -26,7 +25,7 @@ Display::Display(int width, int height, int scale)
 	}
 }
 
-Display::~Display()
+SDLDisplay::~SDLDisplay()
 {
 	delete pixelBuffer;
 	SDL_DestroyTexture(sdlTexture);
@@ -35,7 +34,7 @@ Display::~Display()
 	SDL_Quit();
 }
 
-void Display::CreateWindow(char *windowTitle)
+void SDLDisplay::CreateWindow(char *windowTitle)
 {
 	if (SDL_Init(SDL_INIT_VIDEO) != 0){
 		throw runtime_error(string("SDL_Init Error: ") + SDL_GetError());
@@ -66,12 +65,12 @@ void Display::CreateWindow(char *windowTitle)
 	}
 }
 
-void Display::RefreshFrom(u8 *sourceData, int dataCount)
+void SDLDisplay::Display(u8 *sourceData, u32 dataCount)
 {
 	if (dataCount != displayWidth * displayHeight)
 		return;
 
-	for (int i = 0; i < dataCount; i++)
+	for (u32 i = 0; i < dataCount; i++)
 	{
 		pixelBuffer[i] = (0x00FFFFFF * (u32)sourceData[i]) | 0xFF000000;
 	}

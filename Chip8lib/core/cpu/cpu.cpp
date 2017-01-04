@@ -1,9 +1,9 @@
 /*
- * cpu.cpp
- *
- *  Created on: Jul 4, 2016
- *      Author: Tomas Stibrany
- */
+* cpu.cpp
+*
+*  Created on: Jul 4, 2016
+*      Author: Tomas Stibrany
+*/
 #include "cpu.hpp"
 #include "../memory/ram.hpp"
 #include "instructions/iinstruction.hpp"
@@ -86,7 +86,7 @@ void CPU::SaveReturnAddress()
 
 u16 CPU::LoadReturnAddress()
 {
-	u16 address =  this->stack.top();
+	u16 address = this->stack.top();
 	this->stack.pop();
 	return address;
 }
@@ -94,7 +94,7 @@ u16 CPU::LoadReturnAddress()
 void CPU::WriteToGeneralPurposeRegister(u8 registerIndex, u8 value)
 {
 	u8 safeRegisterIndex = (registerIndex % GPR_COUNT);
-    this->generalPurposeRegister[safeRegisterIndex].Write(value);
+	this->generalPurposeRegister[safeRegisterIndex].Write(value);
 }
 
 u8 CPU::ReadFromGeneralPurposeRegister(u8 registerIndex)

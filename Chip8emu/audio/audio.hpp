@@ -9,32 +9,24 @@
 
 #ifndef IO_OUTPUT_AUDIO_HPP_
 #define IO_OUTPUT_AUDIO_HPP_
-#include "../chip8Types.hpp"
+#include "../../Chip8lib/adapters/audio/chip8AudioAdapter.hpp"
+
 #include <SDL.h>
 #include <SDL_mixer.h>
 
-namespace chip8 {
-	namespace io {
-		namespace output
-		{
-			class Audio
-			{
-			private:
-				Mix_Chunk *sound = NULL;
-			public:
-				Audio(char* wavFilePath);
-				virtual ~Audio();
+using namespace chip8::adapter;
 
-				void Play();
+class SDLAudio : public Chip8AudioAdapter
+{
+private:
+	Mix_Chunk *sound = NULL;
+public:
+	SDLAudio(char* wavFilePath);
+	virtual ~SDLAudio();
 
-				void Stop();
-			};
+	void PlaySound();
 
-		}
-	}
-}
-
-
-
+	void Stop();
+};
 
 #endif /* IO_OUTPUT_AUDIO_HPP_ */

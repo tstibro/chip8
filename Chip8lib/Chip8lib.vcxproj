@@ -1,0 +1,273 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{3BDFBB60-B11E-4629-9356-4E451338088F}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>Chip8lib</RootNamespace>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;CHIP8LIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_USRDLL;CHIP8LIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;CHIP8LIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>NDEBUG;_WINDOWS;_USRDLL;CHIP8LIB_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Chip8.hpp" />
+    <ClInclude Include="chip8Types.hpp" />
+    <ClInclude Include="core\cpu\cpu.hpp" />
+    <ClInclude Include="core\cpu\instructions\addValueToVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\addVxToIndexRegisterInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\addVyToVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\callInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\clearScreenInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\drawSpriteInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\factory\instructionFactory.hpp" />
+    <ClInclude Include="core\cpu\instructions\fillV0toVxWithValueFromMemoryInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\iinstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\jumpInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\jumpToGivenAddressWithOffset.hpp" />
+    <ClInclude Include="core\cpu\instructions\setDelayTimerToVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setIndexRegisterToFontCharacterInVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setIndexRegisterValueInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setSoundTimerToVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToRandomValueBitwiseAndValueInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToValueInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToValueOfDelayTimerInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToVxAndVyInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToVxOrVyInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToVxXorVyInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToVyInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\setVxToVyMinusVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\shiftVxLeftByOneInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\shiftVxRightByOneInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\skipIfKeyInVxIsNotPressedInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\skipIfKeyInVxIsPressedInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxEqualsValueInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxEqualsVyInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxNotEqualsValueInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\skipNextIfVxNotEqualsVyInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\storeBCDvalueOfVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\storeV0toVxInMemoryInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\subrutineReturnInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\subtractVyFromVxInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\unknownInstruction.hpp" />
+    <ClInclude Include="core\cpu\instructions\waitForKeyPressInstruction.hpp" />
+    <ClInclude Include="core\cpu\registers\gpr.hpp" />
+    <ClInclude Include="core\cpu\registers\pcreg.hpp" />
+    <ClInclude Include="core\cpu\registers\ri.hpp" />
+    <ClInclude Include="core\cpu\timers\timer.hpp" />
+    <ClInclude Include="core\gpu\gpu.hpp" />
+    <ClInclude Include="core\memory\programLoader.hpp" />
+    <ClInclude Include="core\memory\ram.hpp" />
+    <ClInclude Include="font\font.hpp" />
+    <ClInclude Include="font\fontChar.hpp" />
+    <ClInclude Include="font\fontLoader.hpp" />
+    <ClInclude Include="adapters\audio\chip8AudioAdapter.hpp" />
+    <ClInclude Include="adapters\video\chip8VideoAdapter.hpp" />
+    <ClInclude Include="keyboard\keyboard.hpp" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Chip8.cpp" />
+    <ClCompile Include="core\cpu\cpu.cpp" />
+    <ClCompile Include="core\cpu\instructions\addValueToVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\addVxToIndexRegisterInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\addVyToVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\callInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\clearScreenInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\drawSpriteInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\factory\instructionFactory.cpp" />
+    <ClCompile Include="core\cpu\instructions\fillV0toVxWithValueFromMemoryInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\iinstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\jumpInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\jumpToGivenAddressWithOffset.cpp" />
+    <ClCompile Include="core\cpu\instructions\setDelayTimerToVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setIndexRegisterToFontCharacterInVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setIndexRegisterValueInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setSoundTimerToVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToRandomValueBitwiseAndValueInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToValueInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToValueOfDelayTimerInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToVxAndVyInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToVxOrVyInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToVxXorVyInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToVyInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\setVxToVyMinusVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\shiftVxLeftByOneInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\shiftVxRightByOneInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\skipIfKeyInVxIsNotPressedInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\skipIfKeyInVxIsPressedInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxEqualsValueInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxEqualsVyInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxNotEqualsValueInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\skipNextIfVxNotEqualsVyInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\storeBCDvalueOfVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\storeV0toVxInMemoryInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\subrutineReturnInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\subtractVyFromVxInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\unknownInstruction.cpp" />
+    <ClCompile Include="core\cpu\instructions\waitForKeyPressInstruction.cpp" />
+    <ClCompile Include="core\cpu\registers\gpr.cpp" />
+    <ClCompile Include="core\cpu\registers\pcreg.cpp" />
+    <ClCompile Include="core\cpu\registers\ri.cpp" />
+    <ClCompile Include="core\cpu\timers\timer.cpp" />
+    <ClCompile Include="core\gpu\gpu.cpp" />
+    <ClCompile Include="core\memory\programLoader.cpp" />
+    <ClCompile Include="core\memory\ram.cpp" />
+    <ClCompile Include="dllmain.cpp">
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</CompileAsManaged>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="font\font.cpp" />
+    <ClCompile Include="font\fontChar.cpp" />
+    <ClCompile Include="font\fontLoader.cpp" />
+    <ClCompile Include="adapters\audio\chip8AudioAdapter.cpp" />
+    <ClCompile Include="adapters\video\chip8VideoAdapter.cpp" />
+    <ClCompile Include="keyboard\keyboard.cpp" />
+    <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
