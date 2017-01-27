@@ -106,9 +106,6 @@ namespace chip8
 		// msPassed is number of milliseconds that have passed since previous cycle.
 		void EmulateCycle(u32 msPassed);
 
-		//void LoadNextInstruction();
-		//Chip8Instruction GetInstructionInfo();
-		//void ExecuteInstruction();
 		static u32 GetDisplayWidth();
 		static u32 GetDisplayHeight();
 	};
