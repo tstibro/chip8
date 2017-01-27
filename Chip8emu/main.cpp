@@ -6,6 +6,7 @@
  */
 #include <iostream>
 #include <chrono>
+#include <string>
 
 #include "../Chip8lib/Chip8.hpp"
 #include "audio/audio.hpp"
@@ -16,23 +17,34 @@
 using namespace std;
 using namespace chip8;
 
+string getBeepSoundFilePathFrom(char **argv);
+SDLAudio *createSDLaudioSound(const string *pathToBeepSoundWaveFile);
+SDLDisplay *createSDLdisplay(int sizeScale);
 void handleInputEvent(SDL_Event event, Chip8 *emulator);
+string substringBeforeLast(string str, char delimiter);
 
 int main(int argc, char **argv)
 {
 	Chip8 *emulator = NULL;
+	string beepSoundWaveFilePath = getBeepSoundFilePathFrom(argv);
+	SDLAudio *audio = createSDLaudioSound(&beepSoundWaveFilePath);
+	SDLDisplay *display = createSDLdisplay(10);
 
-	SDLDisplay *display = new SDLDisplay(Chip8::GetDisplayWidth(), Chip8::GetDisplayHeight(), 10);
-	SDLAudio *audio = NULL;
-	try
+	if (display != nullptr)
 	{
-		audio = new SDLAudio("..\\Debug\\beepsfx.wav");
-		emulator = new Chip8(audio, display);
+		if (audio != nullptr)
+		{
+			emulator = new Chip8(audio, display);
+		}
+		else
+		{
+			// Disable audio
+			emulator = new Chip8(display);
+		}
 	}
-	catch (runtime_error e)
+	else
 	{
-		// Disable audio
-		emulator = new Chip8(display);
+		throw runtime_error("Could not initialize audio and video.");
 	}
 
  	if(argc > 1)
@@ -76,11 +88,55 @@ int main(int argc, char **argv)
 	}
 	else
 	{
+		// TODO: Replace with a file dialog
+		throw runtime_error("Missing argument error. Provide a path to a chip8 binary.");
 		delete emulator;
 		return -1;
 	}
 	delete emulator;
 	return 0;
+}
+
+string getBeepSoundFilePathFrom(char **argv)
+{
+	string pathToExecutable = string(argv[0]);
+	string pathToFolderOfExecutable = substringBeforeLast(pathToExecutable, '\\');
+	return pathToFolderOfExecutable.append("\\beepsfx.wav");
+}
+
+SDLAudio *createSDLaudioSound(const string *pathToBeepSoundWaveFile)
+{
+	SDLAudio *audio = nullptr;
+	try
+	{
+		audio = new SDLAudio(pathToBeepSoundWaveFile->c_str());
+	}
+	catch (runtime_error e)
+	{
+		// Disable audio
+		audio = nullptr;
+	}
+	return audio;
+}
+
+// Creates SDL display with default resolution of Chip8.
+// sizeScale scales this resolution.
+SDLDisplay *createSDLdisplay(int sizeScale)
+{
+	return new SDLDisplay(Chip8::GetDisplayWidth(), Chip8::GetDisplayHeight(), sizeScale);
+}
+
+string substringBeforeLast(string str, char delimiter)
+{
+	if (str.length == 0) 
+	{
+		return str;
+	}
+	int lastDelimiterPosition = str.find_last_of(delimiter);
+	if (lastDelimiterPosition == string::npos) {
+		return str;
+	}
+	return str.substr(0, lastDelimiterPosition);
 }
 
 void handleInputEvent(SDL_Event event, Chip8 *emulator)

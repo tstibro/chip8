@@ -4,7 +4,6 @@
 *  Created on: Nov 24, 2016
 *      Author: Tomas Stibrany
 *
-*  This code is based on: https://gist.github.com/armornick/3447121
 */
 
 #ifndef IO_OUTPUT_AUDIO_HPP_
@@ -21,7 +20,7 @@ class SDLAudio : public Chip8AudioAdapter
 private:
 	Mix_Chunk *sound = NULL;
 public:
-	SDLAudio(char* wavFilePath);
+	SDLAudio(const char* wavFilePath);
 	virtual ~SDLAudio();
 
 	void PlaySound();

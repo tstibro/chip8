@@ -3,13 +3,15 @@
 *
 *  Created on: Nov 24, 2016
 *      Author: Tomas Stibrany
+*
+* This code is based on: https://gist.github.com/armornick/3447121
 */
 #include "audio.hpp"
 #include <stdexcept>
 
 using namespace std;
 
-SDLAudio::SDLAudio(char *wavFilePath)
+SDLAudio::SDLAudio(const char *wavFilePath)
 {
 	if (SDL_Init(SDL_INIT_AUDIO) != 0) {
 		throw runtime_error(string("SDL_Init Error: ") + SDL_GetError());
