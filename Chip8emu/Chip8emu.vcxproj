@@ -35,7 +35,6 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -83,6 +82,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <IncludePath>C:\Development\Dependencies\SDL2_mixer-2.0.1\include;C:\Development\Dependencies\SDL2-2.0.4\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Development\Dependencies\SDL2_mixer-2.0.1\lib\x86;C:\Development\Dependencies\SDL2-2.0.4\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -102,8 +103,7 @@
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>mkdir  "$(TargetDir)audio"
-copy /Y "$(SolutionDir)resources\audio\beepsfx.wav" "$(TargetDir)audio\beepsfx.wav"
+      <Command>copy /Y "$(SolutionDir)resources\audio\beepsfx.wav" "$(TargetDir)beepsfx.wav"
 copy /Y "$(SolutionDir)resources\libraries\SDL2.dll" "$(TargetDir)SDL2.dll"
 copy /Y "$(SolutionDir)resources\libraries\SDL2_mixer.dll" "$(TargetDir)SDL2_mixer.dll"</Command>
     </PostBuildEvent>
@@ -138,13 +138,20 @@ copy /Y "$(SolutionDir)resources\libraries\SDL2_mixer.dll" "$(TargetDir)SDL2_mix
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>C:\Development\Dependencies\SDL2_mixer-2.0.1\include;C:\Development\Dependencies\SDL2-2.0.4\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)resources\audio\beepsfx.wav" "$(TargetDir)beepsfx.wav"
+copy /Y "$(SolutionDir)resources\libraries\SDL2.dll" "$(TargetDir)SDL2.dll"
+copy /Y "$(SolutionDir)resources\libraries\SDL2_mixer.dll" "$(TargetDir)SDL2_mixer.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -166,11 +173,13 @@ copy /Y "$(SolutionDir)resources\libraries\SDL2_mixer.dll" "$(TargetDir)SDL2_mix
   <ItemGroup>
     <ClInclude Include="audio\audio.hpp" />
     <ClInclude Include="display\display.hpp" />
+    <ClInclude Include="tinyFileDialogs\tinyfiledialogs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="audio\audio.cpp" />
     <ClCompile Include="display\display.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="tinyFileDialogs\tinyfiledialogs.c" />
   </ItemGroup>
   <ItemGroup>
     <Media Include="..\Resources\audio\beep.wav">

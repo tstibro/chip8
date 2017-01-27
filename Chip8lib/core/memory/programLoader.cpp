@@ -10,7 +10,7 @@
 using namespace chip8::core::memory;
 using namespace std;
 
-void ProgramLoader::LoadTo(RAM *ram, char *fileName)
+void ProgramLoader::LoadTo(RAM *ram,const char *fileName)
 {
 	ifstream programRom;
 	programRom.open(fileName, ios::binary | ios::in);

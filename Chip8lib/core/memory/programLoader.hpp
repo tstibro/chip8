@@ -18,7 +18,7 @@ namespace chip8 { namespace core { namespace memory
 	private:
 		u32 getFileSize(std::ifstream *fileStream);
 	public:
-		void LoadTo(RAM *ram, char *fileName);
+		void LoadTo(RAM *ram,const char *fileName);
 	};
 
 }}}

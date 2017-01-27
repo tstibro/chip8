@@ -11,6 +11,7 @@
 #include "../Chip8lib/Chip8.hpp"
 #include "audio/audio.hpp"
 #include "display/display.hpp"
+#include "tinyfiledialogs/tinyfiledialogs.h"
 
 #define EVENT_UPDATE_INTERVAL (1000 / 60)
 
@@ -25,6 +26,28 @@ string substringBeforeLast(string str, char delimiter);
 
 int main(int argc, char **argv)
 {
+	const char *chip8ROMfilePath;
+	if (argc > 1)
+	{
+		chip8ROMfilePath = argv[1];
+	}
+	else
+	{
+		char const * fileFilter[1] = { "*.ch8" };
+		chip8ROMfilePath = tinyfd_openFileDialog(
+			"Choose CHIP8 ROM",
+			"",
+			1,
+			fileFilter,
+			NULL,
+			0);
+
+		if (!chip8ROMfilePath)
+		{
+			return -1;
+		}
+	}
+
 	Chip8 *emulator = NULL;
 	string beepSoundWaveFilePath = getBeepSoundFilePathFrom(argv);
 	SDLAudio *audio = createSDLaudioSound(&beepSoundWaveFilePath);
@@ -44,56 +67,50 @@ int main(int argc, char **argv)
 	}
 	else
 	{
-		throw runtime_error("Could not initialize audio and video.");
+		tinyfd_messageBox("Error", "Could not initialize graphics.", "ok", "error", 1);
+		return -1;
 	}
 
- 	if(argc > 1)
+	display->CreateWindow("CHIP8 Emulator");
+ 	emulator->LoadROM(chip8ROMfilePath);
+
+	bool isRunning = true;
+	auto lastTimePoint = chrono::high_resolution_clock::now();
+	long long timeAcc = 0;
+
+	while (isRunning)
 	{
-		display->CreateWindow("CHIP8 Emulator");
- 		emulator->LoadROM(argv[1]);
-
-		bool isRunning = true;
-		auto lastTimePoint = chrono::high_resolution_clock::now();
-		long long timeAcc = 0;
-
-		while (isRunning)
+		auto currentTime = chrono::high_resolution_clock::now();
+		auto timeDelta = chrono::duration_cast<chrono::milliseconds>(currentTime - lastTimePoint).count();
+		if (timeDelta > 0)
 		{
-			auto currentTime = chrono::high_resolution_clock::now();
-			auto timeDelta = chrono::duration_cast<chrono::milliseconds>(currentTime - lastTimePoint).count();
-			if (timeDelta > 0)
-			{
-				lastTimePoint = currentTime;
-				timeAcc += timeDelta;
+			lastTimePoint = currentTime;
+			timeAcc += timeDelta;
 
-				if (timeAcc >= EVENT_UPDATE_INTERVAL)
+			if (timeAcc >= EVENT_UPDATE_INTERVAL)
+			{
+				timeAcc -= EVENT_UPDATE_INTERVAL;
+				SDL_Event event;
+				while (SDL_PollEvent(&event) > 0)
 				{
-					timeAcc -= EVENT_UPDATE_INTERVAL;
-					SDL_Event event;
-					while (SDL_PollEvent(&event) > 0)
+					if (event.type == SDL_QUIT)
 					{
-						if (event.type == SDL_QUIT)
-						{
-							isRunning = false;
-							break;
-						}
-						else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
-						{
-							handleInputEvent(event, emulator);
-						}
+						isRunning = false;
+						break;
+					}
+					else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP)
+					{
+						handleInputEvent(event, emulator);
 					}
 				}
 			}
- 			emulator->EmulateCycle(timeDelta);
 		}
+ 		emulator->EmulateCycle(timeDelta);
 	}
-	else
-	{
-		// TODO: Replace with a file dialog
-		throw runtime_error("Missing argument error. Provide a path to a chip8 binary.");
-		delete emulator;
-		return -1;
-	}
+
 	delete emulator;
+	delete audio;
+	delete display;
 	return 0;
 }
 
@@ -128,7 +145,7 @@ SDLDisplay *createSDLdisplay(int sizeScale)
 
 string substringBeforeLast(string str, char delimiter)
 {
-	if (str.length == 0) 
+	if (str.length() == 0) 
 	{
 		return str;
 	}

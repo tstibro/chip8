@@ -99,7 +99,7 @@ namespace chip8
 		~Chip8();
 
 		// Load Chip8 program to memory
-		void LoadROM(char* romFilePath);
+		void LoadROM(const char *romFilePath);
 		// Update keboard's key state
 		void UpdateInput(u8 keyCode, bool pressed);
 		// Emulate 1 execution cycle

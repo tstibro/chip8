@@ -135,7 +135,7 @@ void Chip8::updateVideo()
 	}
 }
 
-void Chip8::LoadROM(char *romFilePath)
+void Chip8::LoadROM(const char *romFilePath)
 {
 	ProgramLoader programLoader;
 	programLoader.LoadTo(ram, romFilePath);
