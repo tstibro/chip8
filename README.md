@@ -16,6 +16,8 @@ Chip8 emulator can be installed simply by copying the following files anywhere y
 - SDL2_mixer.dll
 - beepsfx.wav
 
+You can download binaries from here: [http://chip8.stibrany.com/Chip8emulator.zip](http://chip8.stibrany.com/Chip8emulator.zip)
+
 ## Controls
 
 Original emulator had 16 keys which are mapped as follows:
