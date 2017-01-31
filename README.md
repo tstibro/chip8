@@ -31,7 +31,12 @@ Every game may use different keys for control, but for example here is how  to p
     Move Left = 4
     Move Right = 6
     Shoot = 5
-  
+
+## Game ROMs
+However games nor programs are not included in this project, you can find some on the internet.  
+One such website is this:
+[http://www.zophar.net/pdroms/chip8/chip-8-games-pack.html](http://www.zophar.net/pdroms/chip8/chip-8-games-pack.html)
+
 
 ## Building from source
 **NOTE:** *Currently Chip8 emulator is compatible with Windows OS only.*
