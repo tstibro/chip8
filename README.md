@@ -16,6 +16,23 @@ Chip8 emulator can be installed simply by copying the following files anywhere y
 - SDL2_mixer.dll
 - beepsfx.wav
 
+## Controls
+
+Original emulator had 16 keys which are mapped as follows:
+
+     CHIP8        KEYBOARD
+    1 2 3 C	      7 8 9 W  
+    4 5 6 D   =>  4 5 6 Q  
+    7 8 9 E       1 2 3 E  
+    A 0 B F       A 0 S F  
+
+Every game may use different keys for control, but for example here is how  to play the INVADERS:
+
+    Move Left = 4
+    Move Right = 6
+    Shoot = 5
+  
+
 ## Building from source
 **NOTE:** *Currently Chip8 emulator is compatible with Windows OS only.*
 ### Prerequisites
